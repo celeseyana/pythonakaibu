@@ -1,6 +1,8 @@
 # pythonakaibu
 conquest inspired python quizzing web app/game
 
-three.js + vitejs + nodejs + expressjs + mysql
+
+react + three.js + beercss
+vitejs + nodejs + expressjs + mysql
 
 
