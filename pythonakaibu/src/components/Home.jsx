@@ -2,7 +2,7 @@ import 'beercss'
 
 function Home() {
   return (
-    <div>home test</div>
+    <div>THIS IS THE FKIN HOME PAGE WORK PLEASE</div>
   )
 }
 

@@ -1,8 +1,33 @@
-import './Login.css'
+import { useState } from 'react';
 import Yurubg from './Yurubg';
-import 'beercss'
+import axios from 'axios';
+import './Login.css';
+import 'beercss';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const [values, setValues] = useState({
+    email: '',
+    password: ''
+  })
+
+  const navigate = useNavigate()
+
+  axios.defaults.withCredentials = true;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:8081/login', values)
+      .then(res => {
+        if (res.data.Status === "Success") {
+          navigate('/')
+        } else {
+          alert(res.data.Message)
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
   return (
     <>
       <div>
@@ -16,18 +41,18 @@ export default function Login() {
           <span>A conquest-inspired interactive Python learning game.</span>
         </div>
 
-        <div className='login-fields white'>
+        <form className='login-fields white' onSubmit={handleSubmit}>
 
           <span>Login</span>
           <span>Please enter your credentials.</span>
 
-          <div className="login-username field border label">
-            <input type='text' name='text' />
-            <label>Username</label>
+          <div className="login-email field border label">
+            <input type='email' name='email' onChange={e => setValues({...values, email: e.target.value})} />
+            <label>Email</label>
           </div>
 
           <div className="login-password field border label">
-            <input type='password' name='password' />
+            <input type='password' name='password' onChange={e => setValues({...values, password: e.target.value})} />
             <label>Password</label>
           </div>
 
@@ -36,7 +61,7 @@ export default function Login() {
             <button className='login-button green3 black-text' type='submit'>Login</button>
           </div>
 
-        </div>
+        </form>
       </div>
     </>
   )
