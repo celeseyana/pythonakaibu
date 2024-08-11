@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors(
     {
         origin: ["http://localhost:5173"],
@@ -19,6 +20,26 @@ const db = mysql.createConnection({
     user: "root",
     password: "",
     database: "signup"
+})
+
+const verifyUser = (req, res, next) => {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.json({Message: "wheres yo token dawg"})
+    } else {
+        jwt.verify(token, "886e7ac0addea5116e60cf0d77d7712708a33de58ee1362a026fa64a82de428b", (err, decoded) => {
+            if (err) {
+               return res.json({Message: "auth error stoopid"})
+            } else {
+                req.name = decoded.name;
+                next();
+           }
+        })
+    }
+}
+
+app.get('/',verifyUser, (req, res) => {
+    return res.json({Status: "Success", name: req.name})
 })
 
 app.post('/login', (req, res) => {
