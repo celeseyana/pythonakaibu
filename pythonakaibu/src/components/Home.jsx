@@ -31,7 +31,9 @@ function Home() {
                 } else {
                     alert("error");
                 }
-            }).catch(err = console.log(err))
+            })
+        // .catch(err = console.log(err)) maybe but err isnt 
+        // picking up but it works without it so uh well idk lol xd
     }
 
     return (
