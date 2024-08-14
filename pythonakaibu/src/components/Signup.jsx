@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Yurubg from './Yurubg';
 import axios from 'axios';
 import 'beercss';
@@ -18,12 +19,31 @@ export default function Signup() {
 
     const handleregSubmit = (event) => {
         event.preventDefault();
+
+        if (!values.name || !values.email || !values.password) {
+            console.log("All fields are required!");
+            alert("All fields are required!");
+            return;
+        }
+
+        if (values.password.length < 8) {
+            console.log("Password must be at least 8 characters long.");
+            alert("Password must be at least 8 characters long.");
+            return;
+        }
+
         console.log(values);
         axios.post('http://localhost:8081/signup', values)
             .then(res => console.log("registration successful")) 
             .catch(err => console.log(err));   
     }
     // res not picked up idk why (???)
+
+    const navigate = useNavigate();
+
+    const toLogin = () => {
+        navigate('/login');
+    };
 
     return (
         <>
@@ -60,7 +80,7 @@ export default function Signup() {
                     </div> */}
 
                     <div className='reg-buttons center'>
-                        <button className="primary login-btn black-text green3">Back to Login</button>    
+                        <button onClick={toLogin} className="primary login-btn black-text green3">Back to Login</button>    
                         <button type='submit' className="primary reg-btn black-text green3">Register</button>
                     </div>
 

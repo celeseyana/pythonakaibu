@@ -11,7 +11,11 @@ export default function Login() {
     password: ''
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const toRegister = () => {
+    navigate('/signup');
+  };
 
   axios.defaults.withCredentials = true;
 
@@ -57,7 +61,7 @@ export default function Login() {
           </div>
 
           <div className='login-buttons center'>
-            <button className='register-button green3 black-text'>Register</button>
+            <button onClick={toRegister} className='register-button green3 black-text'>Register</button>
             <button className='login-button green3 black-text' type='submit'>Login</button>
           </div>
 
