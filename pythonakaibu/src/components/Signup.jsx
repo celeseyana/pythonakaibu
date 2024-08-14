@@ -1,0 +1,71 @@
+import { useState } from 'react';
+import Yurubg from './Yurubg';
+import axios from 'axios';
+import 'beercss';
+import './Signup.css';
+
+export default function Signup() {
+
+    const [values, setValues] = useState({
+        name: '',
+        email: '',
+        password: ''
+    });
+
+    const handleChange = (event) => {
+        setValues({...values, [event.target.name]:event.target.value})
+    }
+
+    const handleregSubmit = (event) => {
+        event.preventDefault();
+        console.log(values);
+        axios.post('http://localhost:8081/signup', values)
+            .then(res => console.log("registration successful")) 
+            .catch(err => console.log(err));   
+    }
+    // res not picked up idk why (???)
+
+    return (
+        <>
+            <div>
+                <Yurubg />
+            </div>
+
+            <div className='reg-container absolute center'>
+                <form className='reg-fields white center middle' onSubmit={handleregSubmit}>
+
+                    <div className='reg-top-text'>
+                        <span>Welcome to PythonAkaibu!</span>
+                        <span>Enter your details here for registration!</span>
+                    </div>
+
+                    <div className="reg-name field border label">
+                        <input type='text' name='name' onChange={handleChange}/>
+                        <label>Name</label>
+                    </div>
+
+                    <div className="reg-email field border label">
+                        <input type='email' name='email' onChange={handleChange}/>
+                        <label>Email</label>
+                    </div>
+
+                    <div className="reg-password field border label">
+                        <input type='password' name='password' onChange={handleChange}/>
+                        <label>Password</label>
+                    </div>
+
+                    {/* <div className="reg-password-cfm field border label">
+                        <input type='password' name='password' />
+                        <label>Confirm Password</label>
+                    </div> */}
+
+                    <div className='reg-buttons center'>
+                        <button className="primary login-btn black-text green3">Back to Login</button>    
+                        <button type='submit' className="primary reg-btn black-text green3">Register</button>
+                    </div>
+
+                </form>
+            </div>
+        </>
+    )
+}

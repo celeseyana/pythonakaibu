@@ -42,6 +42,20 @@ app.get('/',verifyUser, (req, res) => {
     return res.json({Status: "Success", name: req.name})
 })
 
+app.post('/signup', (req, res) => {
+    console.log(req.body)
+    const sql = "INSERT INTO login (name, email, password) VALUES (?, ?, ?)";
+    const values = [
+        req.body.name,
+        req.body.email,
+        req.body.password,
+    ];
+    db.query(sql, values, (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
+
 app.post('/login', (req, res) => {
     const sql = "SELECT * FROM login WHERE email = ? AND password = ?";
     db.query(sql, [req.body.email, req.body.password], (err, data) => {

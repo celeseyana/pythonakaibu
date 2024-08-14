@@ -9,7 +9,7 @@ export default function Login() {
   const [values, setValues] = useState({
     email: '',
     password: ''
-  })
+  });
 
   const navigate = useNavigate()
 
