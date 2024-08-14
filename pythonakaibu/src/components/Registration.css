@@ -1,0 +1,43 @@
+* {
+    font-family: "Noto Serif", serif;
+    color: black;
+}
+
+.reg-container {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    width: 400px;
+    border-radius: 5%;
+}
+
+.reg-fields {
+    padding: 15%;
+}
+
+.reg-top-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.reg-top-text > span {
+    text-align: center;
+}
+
+.reg-buttons {
+    display: flex;
+}
+
+.login-btn,
+.reg-btn {
+    /* this was forced lol*/
+    width: 100px;
+}
+
+.reg-container,
+.reg-top-text,
+.reg-top-text > span,
+.reg-buttons {
+    justify-content: center;
+    align-items: center;
+}

@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './MainThing.css';
 import Home from './Home';
 import Login from './Login';
-import './MainThing.css';
+import Registration from './Registration';
 
 export default function MainPage() {
   return (
@@ -9,6 +10,7 @@ export default function MainPage() {
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/login' element={<Login />}></Route>
+        <Route path='/registration' element={<Registration />}></Route>
       </Routes>
     </BrowserRouter>
   )
