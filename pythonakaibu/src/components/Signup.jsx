@@ -10,8 +10,12 @@ export default function Signup() {
     const [values, setValues] = useState({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        confirmPassword: '',
+        successMsg: ''
     });
+
+    //change above
 
     const handleChange = (event) => {
         setValues({...values, [event.target.name]:event.target.value})
@@ -19,6 +23,9 @@ export default function Signup() {
 
     const handleregSubmit = (event) => {
         event.preventDefault();
+
+        console.log(values.password);
+        console.log(values.confirmPassword);
 
         if (!values.name || !values.email || !values.password) {
             console.log("All fields are required!");
@@ -32,12 +39,22 @@ export default function Signup() {
             return;
         }
 
+        // change below
+        if (values.password !== values.confirmPassword) {
+            console.log("Passwords do not match.");
+            alert("Passwords do not match.");
+            return;
+        }
+
         console.log(values);
         axios.post('http://localhost:8081/signup', values)
-            .then(res => console.log("registration successful")) 
+            .then(res => {
+                console.log("registration successful");
+                navigate('/login');
+            }) 
             .catch(err => console.log(err));   
     }
-    // res not picked up idk why (???)
+    // res not picked up idk why (???) works without it anyway
 
     const navigate = useNavigate();
 
@@ -74,10 +91,10 @@ export default function Signup() {
                         <label>Password</label>
                     </div>
 
-                    {/* <div className="reg-password-cfm field border label">
-                        <input type='password' name='password' />
+                    <div className="reg-password-cfm field border label">
+                        <input type='password' name='confirmPassword' onChange={handleChange}/>
                         <label>Confirm Password</label>
-                    </div> */}
+                    </div>
 
                     <div className='reg-buttons center'>
                         <button onClick={toLogin} className="primary login-btn black-text green3">Back to Login</button>    
