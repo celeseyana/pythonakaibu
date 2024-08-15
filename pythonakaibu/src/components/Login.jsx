@@ -64,7 +64,6 @@ export default function Login() {
             <button onClick={toRegister} className='register-button green3 black-text'>Register</button>
             <button className='login-button green3 black-text' type='submit'>Login</button>
           </div>
-
         </form>
       </div>
     </>
