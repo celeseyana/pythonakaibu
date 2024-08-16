@@ -46,18 +46,16 @@ function Navbar() {
                         <button className="circle transparent">
                             <i>menu</i>
                         </button>
-                            
-                        
-
                         <span className='max center-align'>Hello, {name}</span>
-                        <button onClick={handleLogout}>Logout</button>
+                        <button className='circle red5' onClick={handleLogout}>
+                            <i>logout</i>
+                        </button>
                     </nav>
                 :
-                    <nav className='nav-navbar'>
-                        <h3>{message}</h3>
-                        <h3>You are not logged in.</h3>
+                    <nav className='nav-navbar2'>
+                        <span>{message}</span>
                         <Link to = "/login">
-                            <button>Login</button>
+                            <button className='green3 black-text'>Login</button>
                         </Link>
                     </nav>
             }

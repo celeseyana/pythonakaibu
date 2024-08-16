@@ -3,23 +3,23 @@
     padding: 0;
 }
 
-.homebg {
+.homebg,
+.homebg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
+    z-index: -2;
 }
 
 video {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -2;
 }
 
 .homebg-overlay {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .3);
-    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: -1;
 }

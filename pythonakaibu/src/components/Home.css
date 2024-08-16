@@ -1,0 +1,6 @@
+.home-content {
+    width: fit-content;
+    height: fit-content;
+    z-index: 1;
+    /* this is a scroll test remove later */
+}

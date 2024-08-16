@@ -14,8 +14,8 @@ export default function Home() {
                 <Homebg />
             </div>
 
-            <div className='home-content absolute center middle'>
-                test
+            <div className='home-content white-text center'>
+                <p className='white-text center'>TEST</p>
             </div>
         </>
     )

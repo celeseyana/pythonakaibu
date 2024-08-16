@@ -25,7 +25,7 @@ const db = mysql.createConnection({
 const verifyUser = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) {
-        return res.json({Message: "wheres yo token dawg"})
+        return res.json({Message: "You are not logged in."})
     } else {
         jwt.verify(token, "886e7ac0addea5116e60cf0d77d7712708a33de58ee1362a026fa64a82de428b", (err, decoded) => {
             if (err) {
