@@ -14,8 +14,10 @@ export default function Home() {
                 <Homebg />
             </div>
 
-            <div className='home-content white-text center'>
-                <p className='white-text center'>TEST</p>
+            <div className='parent-container'>
+                <div className='home-content'>
+                    <p className='white-text'>TEST</p>
+                </div>
             </div>
         </>
     )

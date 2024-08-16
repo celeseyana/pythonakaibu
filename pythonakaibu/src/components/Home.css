@@ -1,6 +1,19 @@
+/* Add this to your existing CSS */
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.parent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
 .home-content {
-    width: fit-content;
-    height: fit-content;
     z-index: 1;
-    /* this is a scroll test remove later */
+    text-align: center;
 }
