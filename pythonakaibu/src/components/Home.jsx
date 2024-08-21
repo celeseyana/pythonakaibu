@@ -15,11 +15,10 @@ export default function Home() {
                 <Homebg />
             </div>
 
-            <div className='absolute right'>
-                <SoundButton />
-            </div>
-
             <div className='parent-container'>
+                <div className='absolute top right'>
+                    <SoundButton />
+                </div>
                 <button className='ldb-btn green3 black-text absolute'>Leaderboards</button>
                 <div className='home-content'>
                     <img className='home-logo center' src='./src/assets/homelogo.png'></img>
