@@ -41,6 +41,12 @@ body {
     margin: 20px;
 }
 
+.back-btn {
+    top: 0;
+    left: 0;
+    margin: 20px;
+}
+
 @media screen and (max-width: 620px) {
     .play-btn {
         width: 128px;

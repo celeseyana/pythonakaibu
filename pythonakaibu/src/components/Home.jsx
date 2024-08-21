@@ -13,8 +13,10 @@ export default function Home() {
             case 'leaderboard':
                 return (
                     <>
-                        <h1>Leaderboard Page Test</h1>
-                        <button className='back-btn' onClick={() => setDisplay('home')}>Back</button>
+                        <button className='back-btn absolute' onClick={() => setDisplay('home')}>Back</button>
+                        <div>
+                            <span>test</span>
+                        </div>
                     </>
                 );
             case 'play':
