@@ -46,7 +46,7 @@ function Navbar() {
                         <button className="circle transparent">
                             <i>menu</i>
                         </button>
-                        <span className='max center-align'>Welcome, Player {name}.</span>
+                        <span className='max center-align'>Welcome, {name}.</span>
                         <button className='circle red5' onClick={handleLogout}>
                             <i>logout</i>
                         </button>

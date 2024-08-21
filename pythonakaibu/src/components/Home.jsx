@@ -2,6 +2,7 @@ import Navbar from './Navbar';
 import Homebg from './Homebg';
 import 'beercss';
 import './Home.css'
+import SoundButton from './SoundButton';
 
 export default function Home() {
     return (
@@ -14,9 +15,20 @@ export default function Home() {
                 <Homebg />
             </div>
 
+            <div className='absolute right'>
+                <SoundButton />
+            </div>
+
             <div className='parent-container'>
+                <button className='ldb-btn green3 black-text absolute'>Leaderboards</button>
                 <div className='home-content'>
-                    <p className='white-text'>TEST</p>
+                    <img className='home-logo center' src='./src/assets/homelogo.png'></img>
+                    <img
+                        className='play-btn center'
+                        src="./src/assets/static_play.png"
+                        onMouseOver={e => (e.currentTarget.src = "./src/assets/hover_play.png")}
+                        onMouseOut={e => (e.currentTarget.src = "./src/assets/static_play.png")}
+                    />
                 </div>
             </div>
         </>

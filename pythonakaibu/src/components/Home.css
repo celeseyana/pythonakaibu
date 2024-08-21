@@ -15,4 +15,41 @@ body {
 .home-content {
     z-index: 1;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.play-btn {
+    width: 256px;
+    height: 128px;
+}
+
+.ldb-btn {
+    margin: 20px;
+    top: 0;
+    left: 0;
+}
+
+.home-logo {
+    width: 90%;
+    height: 90%;
+}
+
+.sound-btn {
+    top: 0;
+    max-width: 64px;
+    max-height: 64px;
+    margin: 20px;
+}
+
+@media screen and (max-width: 620px) {
+    .play-btn {
+        width: 128px;
+        height: 64px;
+    }
+
+    .home-logo {
+        width: 70%;
+        height: 70%;
+    }
 }
