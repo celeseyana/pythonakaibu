@@ -1,0 +1,59 @@
+.ldb-container {
+    width: 512px;
+    max-height: 800px;
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.ldb-data-container {
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+.ldb-title {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.ldb-labels,
+.ldb-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.ldb-labels > span,
+.ldb-data > span {
+    width: 100px;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.ldb-title,
+.ldb-labels,
+.ldb-data {
+    padding: 10px;
+}
+
+.ldb-rank {
+    max-width: 10px;
+}
+
+@media screen and (max-width: 620px) {
+    .ldb-container {
+        margin-top: 128px;
+        width: 320px;
+    }
+}
+
+

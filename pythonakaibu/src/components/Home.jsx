@@ -1,8 +1,9 @@
 import Navbar from './Navbar';
 import Homebg from './Homebg';
+import SoundButton from './SoundButton';
+import Leaderboard from './Leaderboard';
 import 'beercss';
 import './Home.css'
-import SoundButton from './SoundButton';
 import { useState } from 'react';
 
 export default function Home() {
@@ -13,17 +14,15 @@ export default function Home() {
             case 'leaderboard':
                 return (
                     <>
-                        <button className='back-btn absolute' onClick={() => setDisplay('home')}>Back</button>
-                        <div>
-                            <span>test</span>
-                        </div>
+                        <button className='back-btn absolute green3 black-text' onClick={() => setDisplay('home')}>Back</button>
+                        <Leaderboard />
                     </>
                 );
             case 'play':
                 return (
                     <>
                         <h1>Play Page Tests</h1>
-                        <button className='back-btn' onClick={() => setDisplay('home')}>Back</button>
+                        <button className='back-btn absolute green3 black-text' onClick={() => setDisplay('home')}>Back</button>
                     </>
                 );
             default:
