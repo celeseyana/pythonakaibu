@@ -4,7 +4,7 @@ import './Navbar.css';
 import 'beercss';
 import { Link } from 'react-router-dom';
 
-function Navbar() {
+export default function Navbar() {
     const [auth, setAuth] = useState(false)
     const [name, setName] = useState('')
     const [message, setMessage] = useState('')
@@ -63,5 +63,3 @@ function Navbar() {
         </>
     )
 }
-
-export default Navbar
