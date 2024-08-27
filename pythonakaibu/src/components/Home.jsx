@@ -45,9 +45,8 @@ import { useEffect, useState } from 'react';
                     >
                         Leaderboards
                     </button>
-                    
-                        <div className='home-content'>
-                            <img className='home-logo center' src='./src/assets/homelogo.png' alt="Home Logo"></img>
+                    <div className='home-content'>
+                        <img className='home-logo center' src='./src/assets/homelogo.png' alt="Home Logo"></img>
                         {         
                             auth ?  
                                     
