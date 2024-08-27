@@ -53,7 +53,7 @@ function Navbar() {
                     </nav>
                 :
                     <nav className='nav-navbar2'>
-                        <span>{message}</span>
+                        <span className='center'>{message}</span>
                         <Link to = "/login">
                             <button className='green3 black-text'>Login</button>
                         </Link>
