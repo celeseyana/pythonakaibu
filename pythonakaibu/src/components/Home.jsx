@@ -93,7 +93,8 @@ export default function Home() {
     return (
         <>
             <div>
-                <Navbar auth={auth} name={name} handleLogout={handleLogout} message={message}/>
+                <Navbar auth={auth} name={name} handleLogout={handleLogout} message={message} />
+                {/* navbar is child compo to home */}
             </div>
 
             <div>
