@@ -1,3 +1,27 @@
 body {
     z-index: -1;
 }
+
+.game-quit {
+    z-index: 1;
+    margin: 15px;
+}
+
+.p1-details,
+.p2-details {
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.p1-details {
+    left: 20px;
+    text-align: left;
+}
+
+.p2-details {
+    right: 20px;
+    text-align: right;
+}

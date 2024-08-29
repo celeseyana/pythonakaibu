@@ -1,6 +1,5 @@
 import { OrbitControls } from '@react-three/drei'; 
 import { RigidBody } from '@react-three/rapier';
-// import { Torii } from './Torii';
 import Tile from "./Tile";
 
 // mesh should be a board game
@@ -33,7 +32,7 @@ function ConqBoard({ rows, cols }) {
 
     extraTilesBottomLeft.forEach((pos, index) => {
         tiles.push(
-            <Tile key={`bottom-left-${index}`} position={pos} color="darkgray" />
+            <Tile key={`bottom-left-${index}`} position={pos} color="lightgreen" />
         );
     });
 
@@ -49,7 +48,7 @@ function ConqBoard({ rows, cols }) {
 
     extraTilesTopRight.forEach((pos, index) => {
         tiles.push(
-            <Tile key={`top-right-${index}`} position={pos} color="darkgray" />
+            <Tile key={`top-right-${index}`} position={pos} color="lightgreen" />
         );
     });
 
@@ -60,7 +59,8 @@ function ConqBoard({ rows, cols }) {
 const SceneMap1 = () => {
     return (
         <>
-            <OrbitControls />
+            {/* <OrbitControls /> */}
+            {/* the above makes it rotate but idk whether that sld be a feature or nah */}
             <ambientLight intensity={1} />
             <directionalLight
                 position={[5, 5, 5]}
