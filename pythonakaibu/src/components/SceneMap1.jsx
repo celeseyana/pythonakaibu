@@ -1,5 +1,5 @@
-import { Cylinder, OrbitControls } from '@react-three/drei'; 
-import { CylinderCollider, RigidBody } from '@react-three/rapier';
+import { OrbitControls } from '@react-three/drei'; 
+import { RigidBody } from '@react-three/rapier';
 // import { Torii } from './Torii';
 import Tile from "./Tile";
 
@@ -15,17 +15,47 @@ function ConqBoard({ rows, cols }) {
             const x = col * 1.5 * tileRadius;
             const y = row * height + (col % 2 === 0 ? 0 : height / 2);
 
-            const color = (row + col) % 2 === 0 ? 'gray' : 'white';
+            const color = (row + col) % 2 === 0 ? 'cyan' : 'white';
 
             tiles.push(
                 <Tile key={`${row}-${col}`} position={[x, y, 0]} color={color} />
             );
         }
     }
+
+    const extraTilesBottomLeft = [
+        [-1.5 * tileRadius, -height / 2, 0],
+        [-3.0 * tileRadius, 0, 0],
+        [-3.0 * tileRadius, height, 0],
+        [-1.5 * tileRadius, 1.5 * height, 0],
+        [-5, height / 2, 0],
+    ];
+
+    extraTilesBottomLeft.forEach((pos, index) => {
+        tiles.push(
+            <Tile key={`bottom-left-${index}`} position={pos} color="darkgray" />
+        );
+    });
+
+    const extraTilesTopRight = [
+        [(cols) * 1.5 * tileRadius, (rows - 0.5) * height, 0],
+        [(cols + 1) * 1.5 * tileRadius, (rows) * height, 0],
+        [(cols + 2) * 1.5 * tileRadius, (rows - 0.5) * height, 0],
+        [(cols + 2) * 1.5 * tileRadius, (rows - 1.5) * height, 0],
+        [(cols + 1) * 1.5 * tileRadius, (rows - 2) * height, 0],
+        [(cols) * 1.5 * tileRadius, (rows - 1.5) * height, 0],
+        [(cols) * 1.5 * tileRadius, (rows - 2.5) * height, 0],
+    ];
+
+    extraTilesTopRight.forEach((pos, index) => {
+        tiles.push(
+            <Tile key={`top-right-${index}`} position={pos} color="darkgray" />
+        );
+    });
+
     return <>{tiles}</>;
+
 }
-
-
 
 const SceneMap1 = () => {
     return (
@@ -39,13 +69,8 @@ const SceneMap1 = () => {
                 color={"#9e69da"}
             />
 
-            {/* leave this section */}
-            {/* <Torii scale={[16, 16, 16]} position={[0, 0, -22]} rotation-y={1.25 * Math.PI} />
-            <Torii scale={[10, 10, 10]} position={[-8, 0, -20]} rotation-y={1.4 * Math.PI} />
-            <Torii scale={[10, 10, 10]} position={[8, 0, -20]} rotation-y={1 * Math.PI} /> */}
-
-            <RigidBody colliders={false} type='fixed' position-x={-5.5} position-y={-7}>
-                <ConqBoard rows={8} cols={8} />
+            <RigidBody colliders={false} type='fixed' position-x={-5} position-y={-5}>
+                <ConqBoard rows={7} cols={7} />
             </RigidBody>
         </>
     )

@@ -7,7 +7,7 @@ import './Map1.css';
 export default function Map1() {
     return (
         <div style={{ width: "100vw", height: "100vh" }}>
-            <Canvas shadows camera={{ position: [0, 0, 10], fov: 80}}>
+            <Canvas shadows camera={{ position: [0, -3, 10], fov: 75}}>
                 <color attach="background" args={["#dbecfb"]} />
                 <fog attach="fog" args={["#dbecfb", 30, 40]} />
                 <Suspense>

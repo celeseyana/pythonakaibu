@@ -19,7 +19,13 @@ export default function Tile({ position, color }) {
         return shape;
     }, []);
 
-    const tileGeom = useMemo(() => new THREE.ShapeGeometry(boardTile), [boardTile]);
+    const boldTiles = useMemo(() => ({
+        depth: 0.2, 
+        bevelEnabled: false,
+    }
+    ), []);
+
+    const tileGeom = useMemo(() => new THREE.ExtrudeGeometry(boardTile, boldTiles));
 
     return (
         <mesh position={position} geometry={tileGeom}>
