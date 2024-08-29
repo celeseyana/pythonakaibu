@@ -56,16 +56,6 @@ export default function Home() {
                                 />
                                 <span className='changa-one-regular absolute center middle'>Map 1</span>
                             </div>
-
-                            <div>
-                                <img
-                                    className='lvl-btn'
-                                    src="./src/assets/static_base.png"
-                                    onMouseOver={e => (e.currentTarget.src = "./src/assets/hover_base.png")}
-                                    onMouseOut={e => (e.currentTarget.src = "./src/assets/static_base.png")}
-                                />
-                                <span className='changa-one-regular absolute center middle'>Map 2</span>
-                            </div>
                         </div>
 
                         <img src='./src/assets/arrow_back.png' className='back-btn absolute' onClick={() => setDisplay('home')}></img>
