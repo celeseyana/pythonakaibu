@@ -44,7 +44,7 @@ const SceneMap1 = () => {
             <Torii scale={[10, 10, 10]} position={[-8, 0, -20]} rotation-y={1.4 * Math.PI} />
             <Torii scale={[10, 10, 10]} position={[8, 0, -20]} rotation-y={1 * Math.PI} /> */}
 
-            <RigidBody colliders={false} type='fixed' position-y={-0.5}>
+            <RigidBody colliders={false} type='fixed' position-x={-5.5} position-y={-7}>
                 <ConqBoard rows={8} cols={8} />
             </RigidBody>
         </>
