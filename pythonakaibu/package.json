@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^9.111.3",
     "@react-three/fiber": "^8.17.6",
+    "@react-three/rapier": "^1.4.0",
     "axios": "^1.7.3",
     "beercss": "^3.6.13",
     "cookie-parser": "^1.4.6",
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
+    "@react-three/eslint-plugin": "^0.1.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

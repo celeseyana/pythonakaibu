@@ -4,6 +4,20 @@ body {
     margin: 0;
 }
 
+.changa-one-regular {
+    font-family: "Changa One", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 72px;
+    color: #e1f4b1;
+}
+
+.changa-one-regular-italic {
+    font-family: "Changa One", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+}
+
 .parent-container {
     display: flex;
     justify-content: center;
@@ -45,6 +59,18 @@ body {
     top: 0;
     left: 0;
     margin: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+.lvl-btn-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.lvl-btn {
+    max-width: 512px;
+    max-height: 256px;
 }
 
 @media screen and (max-width: 620px) {
@@ -57,4 +83,9 @@ body {
         width: 70%;
         height: 70%;
     }
+
+        .lvl-btn {
+            max-width: 256px;
+            max-height: 128px;
+        }
 }
