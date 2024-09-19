@@ -22,7 +22,7 @@ function ConqBoard({ rows, cols }) {
         }
     }
 
-    const extraTilesBottomLeft = [
+    const p1Start = [
         [-1.5 * tileRadius, -height / 2, 0],
         [-3.0 * tileRadius, 0, 0],
         [-3.0 * tileRadius, height, 0],
@@ -30,13 +30,13 @@ function ConqBoard({ rows, cols }) {
         [-5, height / 2, 0],
     ];
 
-    extraTilesBottomLeft.forEach((pos, index) => {
+    p1Start.forEach((pos, index) => {
         tiles.push(
             <Tile key={`bottom-left-${index}`} position={pos} color="lightgreen" />
         );
     });
 
-    const extraTilesTopRight = [
+    const p2Start = [
         [(cols) * 1.5 * tileRadius, (rows - 0.5) * height, 0],
         [(cols + 1) * 1.5 * tileRadius, (rows) * height, 0],
         [(cols + 2) * 1.5 * tileRadius, (rows - 0.5) * height, 0],
@@ -46,7 +46,7 @@ function ConqBoard({ rows, cols }) {
         [(cols) * 1.5 * tileRadius, (rows - 2.5) * height, 0],
     ];
 
-    extraTilesTopRight.forEach((pos, index) => {
+    p2Start.forEach((pos, index) => {
         tiles.push(
             <Tile key={`top-right-${index}`} position={pos} color="lightgreen" />
         );
