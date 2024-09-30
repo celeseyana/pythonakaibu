@@ -1,0 +1,17 @@
+.tile {
+    width: 100px;
+    height: 100px;
+    background-color: #1abc9c;
+    position: relative;
+    margin: -10px 3px;
+    clip-path: polygon(50% 0%,
+            100% 25%,
+            100% 75%,
+            50% 100%,
+            0% 75%,
+            0% 25%);
+}
+
+.tile:hover {
+    background-color: #16a085;
+}
