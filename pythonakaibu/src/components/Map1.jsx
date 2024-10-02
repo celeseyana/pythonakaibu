@@ -8,6 +8,8 @@ import 'beercss';
 import Board from './Board';  
 import Gamebg from './GameBG';
 import GameUI from './GameUI';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const spritesheets = {
     attack: {
@@ -80,7 +82,7 @@ export default function Map1() {
                     }}
                 >
                 </img>
-                
+
                 <img
                     className='quit-game absolute bottom left'
                     src='./src/assets/quit.png'
@@ -93,6 +95,7 @@ export default function Map1() {
                 >
                 </img>
                 
+
                 <Tooltip className='zaTooltip' anchorSelect=".faq-hover" place="top" effect="solid">
                     {/* this was hard coded to hell but if it works it works :) */}
                     <div className='sprites'>
