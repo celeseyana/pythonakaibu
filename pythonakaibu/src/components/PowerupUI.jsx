@@ -47,9 +47,15 @@ export default function PowerupUI() {
         <div className='powerup-gui'>
             <span className='active-text'>Active</span>
             <div className='sprites'>
-                <Sprite frame={attackFrame} type="attack" /> 
-                <Sprite frame={defenseFrame} type="defense" /> 
-                <Sprite frame={speedFrame} type="movement" /> 
+                <div className='sprite-container'>
+                    <Sprite frame={attackFrame} type="attack" />
+                </div>
+                <div className='sprite-container'>
+                    <Sprite frame={defenseFrame} type="defense" />
+                </div>
+                <div className='sprite-container'>
+                    <Sprite frame={speedFrame} type="movement" />
+                </div>
             </div>
         </div>
     );

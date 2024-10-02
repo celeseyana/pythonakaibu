@@ -1,0 +1,14 @@
+.sprite-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sprite-container span {
+    width: 100px;
+    color: white;
+}
+
+.zaTooltip {
+    z-index: 51;
+}
