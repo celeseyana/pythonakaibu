@@ -16,7 +16,8 @@ const HealthBar2 = ({ maxHp = 100, hp = 100 } = {}) => {
                     className='bar-text-2'
                     style={{
                         position: "absolute",
-                        right: "0px"
+                        right: "0px",
+                        color: "white",
                     }}
                     >
                     {hp} / {maxHp}

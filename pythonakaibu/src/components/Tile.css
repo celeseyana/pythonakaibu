@@ -10,8 +10,10 @@
             50% 100%,
             0% 75%,
             0% 25%);
+    z-index: 99;
 }
 
 .tile:hover {
     background-color: #16a085;
+    transition: 0.3s ease;
 }
