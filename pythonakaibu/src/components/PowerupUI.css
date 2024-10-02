@@ -3,3 +3,121 @@
     font-size: xx-large;
     color: white;
 }
+
+.sprite {   
+    background-repeat: no-repeat;
+}
+
+.sprites {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.attack-buff {
+    width: 64px;
+    height: 64px;
+    background-image: url('../assets/atk_buff.png');
+}
+
+.defense-buff {
+    width: 32px;
+    height: 34px;
+    background-image: url('../assets/defense_buff.png');
+}
+
+.movement-buff {
+    width: 112px;
+    height: 112px;
+    background-image: url('../assets/movement_buff.png');
+}
+
+.attack-buff.sprite-frame-1 {
+    background-position: 0 0;
+}
+
+.attack-buff.sprite-frame-2 {
+    background-position: -96px 0;
+}
+
+.attack-buff.sprite-frame-3 {
+    background-position: -192px 0;
+}
+
+.attack-buff.sprite-frame-4 {
+    background-position: -288px 0;
+}
+
+.attack-buff.sprite-frame-5 {
+    background-position: -384px 0;
+}
+
+.attack-buff.sprite-frame-6 {
+    background-position: -480px 0;
+}
+
+.attack-buff.sprite-frame-7 {
+    background-position: -576px 0;
+}
+
+.defense-buff {
+    background-image: url('../assets/defense_buff.png');
+}
+
+.defense-buff.sprite-frame-1 {
+    background-position: 0 0;
+}
+
+.defense-buff.sprite-frame-2 {
+    background-position: -32px 0;
+}
+
+.defense-buff.sprite-frame-3 {
+    background-position: -64px 0;
+}
+
+.defense-buff.sprite-frame-4 {
+    background-position: -96px 0;
+}
+
+.movement-buff {
+    background-image: url('../assets/movement_buff.png');
+}
+
+.movement-buff.sprite-frame-1 {
+    background-position: 0 0;
+}
+
+.movement-buff.sprite-frame-2 {
+    background-position: -112px 0;
+}
+
+.movement-buff.sprite-frame-3 {
+    background-position: -224px 0;
+}
+
+.movement-buff.sprite-frame-4 {
+    background-position: -336px 0;
+}
+
+.movement-buff.sprite-frame-5 {
+    background-position: -448px 0;
+}
+
+.movement-buff.sprite-frame-6 {
+    background-position: -560px 0;
+}
+
+.movement-buff.sprite-frame-7 {
+    background-position: -672px 0;
+}
+
+.movement-buff.sprite-frame-8 {
+    background-position: -784px 0;
+}
+
+.movement-buff.sprite-frame-9 {
+    background-position: -896px 0;
+}
