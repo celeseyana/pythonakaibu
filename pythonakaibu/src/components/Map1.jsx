@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Sprite from './SpriteReader';
 import { Tooltip } from 'react-tooltip'
 import './Map1.css';
@@ -24,6 +25,11 @@ const spritesheets = {
 };
 
 export default function Map1() {
+    const navigate = useNavigate(); 
+
+    const backtoHome = () => {
+        navigate('/'); 
+    };
     // const [atkTooltip, setAtkTooltip] = useState("Attack Buff Tooltip");
     // const [defTooltip, setDefTooltip] = useState("Defense Buff Tooltip");
     // const [spdTooltip, setSpdTooltip] = useState("Speed Buff Tooltip");
@@ -74,7 +80,19 @@ export default function Map1() {
                     }}
                 >
                 </img>
-
+                
+                <img
+                    className='quit-game absolute bottom left'
+                    src='./src/assets/quit.png'
+                    style={{
+                        width: "32px",
+                        height: "32px",
+                        zIndex: "6"
+                    }}
+                    // onClick={backtoHome}
+                >
+                </img>
+                
                 <Tooltip className='zaTooltip' anchorSelect=".faq-hover" place="top" effect="solid">
                     {/* this was hard coded to hell but if it works it works :) */}
                     <div className='sprites'>
@@ -88,10 +106,10 @@ export default function Map1() {
                                 Raging Skeletal System: Doubles your attack for the next turn.
                             </span>
                         </div>
-                        <div className='sprite-container'>
+                        <div className='sprite-container def-sprite'>
                             <Sprite frame={defenseFrame} type="defense" />
                             <span style={{
-                                marginLeft: "121px"
+                                marginLeft: "70px"
                             }}>
                                 Great Nature: Halves damage taken in the next turn.
                             </span>
