@@ -6,7 +6,7 @@ import HealthBar2 from './HealthBar2';
 import PowerupUI from './PowerupUI';
 
 export default function GameUI() {
-    const turnCount = 0;
+    const turnCount = 1;
 
     return (
         <>
