@@ -74,4 +74,16 @@
     background-position: 0 -240px;
 }
 
+.dice-container {
+    margin-top: 20px;
+}
 
+.dice-container span {
+    color: white;
+}
+
+.dice-container input,
+.dice-container span,
+.dice-container img {
+    margin: 10px;
+}
