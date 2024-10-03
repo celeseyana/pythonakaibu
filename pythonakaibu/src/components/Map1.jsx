@@ -8,8 +8,7 @@ import 'beercss';
 import Board from './Board';  
 import Gamebg from './GameBG';
 import GameUI from './GameUI';
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
+import { ClickAwayListener } from '@mui/base/ClickAwayListener';
 
 const spritesheets = {
     attack: {
@@ -32,6 +31,17 @@ export default function Map1() {
     const backtoHome = () => {
         navigate('/'); 
     };
+
+    const [open, setOpen] = useState(false);
+
+    const handleClick = () => {
+        setOpen((prev) => !prev);
+    };
+
+    const handleClickAway = () => {
+        setOpen(false);
+    };
+
     // const [atkTooltip, setAtkTooltip] = useState("Attack Buff Tooltip");
     // const [defTooltip, setDefTooltip] = useState("Defense Buff Tooltip");
     // const [spdTooltip, setSpdTooltip] = useState("Speed Buff Tooltip");
@@ -83,19 +93,6 @@ export default function Map1() {
                 >
                 </img>
 
-                <img
-                    className='quit-game absolute bottom left'
-                    src='./src/assets/quit.png'
-                    style={{
-                        width: "32px",
-                        height: "32px",
-                        zIndex: "6"
-                    }}
-                    // onClick={backtoHome}
-                >
-                </img>
-                
-
                 <Tooltip className='zaTooltip' anchorSelect=".faq-hover" place="top" effect="solid">
                     {/* this was hard coded to hell but if it works it works :) */}
                     <div className='sprites'>
@@ -128,6 +125,31 @@ export default function Map1() {
                     </div>
                 </Tooltip>
             </div>
+
+                <ClickAwayListener onClickAway={handleClickAway}>
+                    <div>
+                        <img
+                            className='quit-game absolute bottom left'
+                            src='./src/assets/quit.png'
+                            style={{
+                                width: "32px",
+                                height: "32px",
+                                zIndex: "6"
+                        }}
+                        onClick={handleClick}
+                        >
+                        </img>
+                        {open ? (
+                            <div className='quit-popup absolute center'>
+                                <span className='white-text'>Are you sure you want to quit the game?</span>
+                                <div className='yes-no-quit'>
+                                    <img onClick={handleClickAway} src='./src/assets/quit.png'></img>
+                                    <img onClick={backtoHome} src='./src/assets/confirm.png'></img>
+                                </div>
+                            </div>
+                        ) : null}
+                    </div>
+                </ClickAwayListener>
             
         </>
     );

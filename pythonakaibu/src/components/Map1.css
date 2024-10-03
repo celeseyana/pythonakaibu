@@ -16,3 +16,23 @@
 .def-sprite {
     margin-left: 50px;
 }
+
+.quit-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* hard code simulator skull emoji */
+    z-index: 99;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid #ff0000;
+    border-radius: 10%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.yes-no-quit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 20px 20px 10px 20px;
+}
