@@ -11,7 +11,7 @@ const unitSprites = {
     },
     player2: {
         path: '../assets/p2chara.png',
-        totalFrames: 4,
+        totalFrames: 5,
     },
 
 };
