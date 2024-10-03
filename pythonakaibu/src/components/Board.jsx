@@ -74,48 +74,40 @@ const Board = () => {
         }
 
         const currentPosition = currentTurn === 'player1' ? player1Position : player2Position;
-        const distance = Math.abs(currentPosition.row - row) + Math.abs(currentPosition.col - col);
 
-        if (diceValue === 6) {
-            const validMoves = hexNeighbors(currentPosition.row, currentPosition.col);
-            const isValidMove = validMoves.some(pos => pos.row === row && pos.col === col);
-            if (!isValidMove) {
-                console.log("You can only move to connected tiles.");
-                return;
-            }
-        } else {
-            if (distance !== 1) {
-                console.log("You can only move one tile at a time.");
-                return;
-            }
-        }
+        const validMoves = hexNeighbors(currentPosition.row, currentPosition.col);
+        const isValidMove = validMoves.some(pos => pos.row === row && pos.col === col);
 
         if (
             (currentTurn === 'player1' && row === player2Position.row && col === player2Position.col) ||
             (currentTurn === 'player2' && row === player1Position.row && col === player1Position.col)
         ) {
             console.log("You cannot move to a tile occupied by the other player.");
-            return; // this checks for collisions (validation checking)
+            return; // collision check
         }
 
-        if (currentTurn === 'player1') {
-            setPlayer1Position({ row, col });
-            setMovesCount(prevCount => ({ ...prevCount, player1: prevCount.player1 + 1 }));
-            console.log(`Player 1 moves: ${movesCount.player1 + 1}`);
+        if (isValidMove) {
+            if (currentTurn === 'player1') {
+                setPlayer1Position({ row, col });
+                setMovesCount(prevCount => ({ ...prevCount, player1: prevCount.player1 + 1 }));
+                console.log(`Player 1 moves: ${movesCount.player1 + 1}`);
+            } else {
+                setPlayer2Position({ row, col });
+                setMovesCount(prevCount => ({ ...prevCount, player2: prevCount.player2 + 1 }));
+                console.log(`Player 2 moves: ${movesCount.player2 + 1}`);
+            }
+
+            setRemainingMoves(prevRemaining => prevRemaining - 1);
+
+            if (remainingMoves - 1 === 0) {
+                console.log(`${currentTurn} has completed their move!`);
+                setCurrentTurn(currentTurn === 'player1' ? 'player2' : 'player1');
+                setDiceRolled(false); 
+                setDiceValue(0); 
+                setRemainingMoves(0); 
+            }
         } else {
-            setPlayer2Position({ row, col });
-            setMovesCount(prevCount => ({ ...prevCount, player2: prevCount.player2 + 1 }));
-            console.log(`Player 2 moves: ${movesCount.player2 + 1}`);
-        }
-
-        setRemainingMoves(prevRemaining => prevRemaining - 1);
-
-        if (remainingMoves - 1 === 0) {
-            console.log(`${currentTurn} has completed their move!`);
-            setCurrentTurn(currentTurn === 'player1' ? 'player2' : 'player1');
-            setDiceRolled(false);
-            setDiceValue(0); 
-            setRemainingMoves(0); 
+            console.log("You can only move to connected tiles.");
         }
     };
 
