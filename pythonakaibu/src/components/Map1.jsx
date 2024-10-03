@@ -88,7 +88,8 @@ export default function Map1() {
                     style={{
                         width: "32px",
                         height: "32px",
-                        zIndex: "6"
+                        zIndex: "6",
+                        margin: "20px"
                     }}
                 >
                 </img>
@@ -134,7 +135,8 @@ export default function Map1() {
                             style={{
                                 width: "32px",
                                 height: "32px",
-                                zIndex: "6"
+                                zIndex: "6",
+                                margin: "20px"
                         }}
                         onClick={handleClick}
                         >

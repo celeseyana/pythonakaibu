@@ -15,3 +15,34 @@
     justify-content: center;
 }
 
+.charasprite {
+    width: 48px;
+    height: 48px;
+    background-size: cover;
+}
+
+.player1 {
+    background-image: url('../assets/p1chara.png');
+}
+
+.player1.sprite-frame-1 {
+    background-position: 0 -48px;
+}
+
+.player1.sprite-frame-2 {
+    background-position: 0 -96px;
+}
+
+.player1.sprite-frame-3 {
+    background-position: 0 -144px;
+}
+
+.player1.sprite-frame-4 {
+    background-position: 0 -192px;
+}
+
+.player1.sprite-frame-5 {
+    background-position: 0 -240px;
+}
+
+
