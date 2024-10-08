@@ -70,10 +70,12 @@ export default function Map1() {
         };
     }, []);
 
+    const [turnCount, setTurnCount] = useState(1); // Define turnCount in the parent component
+
     return (
         <>
             <div>
-                <GameUI />
+                <GameUI turnCount={turnCount} setTurnCount={setTurnCount} />
             </div>
 
             <div>
@@ -81,7 +83,7 @@ export default function Map1() {
             </div>
             
             <div className="board-container">
-                <Board />
+                <Board turnCount={turnCount} setTurnCount={setTurnCount} />
                 <img
                     className='faq-hover absolute bottom right'
                     src='./src/assets/powerup_faq.png'

@@ -27,6 +27,7 @@
 /* p1 */
 .player1 {
     background-image: url('../assets/p1chara.png');
+    transform: scale(1.2);
 }
 
 .player1.sprite-frame-1 {

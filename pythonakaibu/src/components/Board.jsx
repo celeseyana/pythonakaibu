@@ -18,7 +18,7 @@ const unitSprites = {
 
 };
 
-const Board = () => {
+const Board = ({ turnCount, setTurnCount }) => {
     const [player1Frame, setPlayer1Frame] = useState(1);
     const [player1Position, setPlayer1Position] = useState({ row: 0, col: 0 });
 
@@ -155,6 +155,10 @@ const Board = () => {
             if (remainingMoves - 1 === 0) {
                 console.log(`${currentTurn} has completed their move!`);
                 setCurrentTurn(currentTurn === 'player1' ? 'player2' : 'player1');
+                if (currentTurn === 'player2') {
+                    setTurnCount(prevCount => prevCount + 1); // Lift the turn count up
+                    console.log(`Turn Count: ${turnCount + 1}`);
+                }
                 setDiceRolled(false); 
                 setDiceValue(0); 
                 setRemainingMoves(0); 

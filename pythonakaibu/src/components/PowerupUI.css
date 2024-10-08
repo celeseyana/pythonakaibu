@@ -20,18 +20,21 @@
     width: 64px;
     height: 64px;
     background-image: url('../assets/atk_buff.png');
+    transform: scale(1.3);
 }
 
 .defense-buff {
     width: 32px;
     height: 34px;
     background-image: url('../assets/defense_buff.png');
+    transform: scale(1.2);
 }
 
 .movement-buff {
     width: 112px;
     height: 112px;
     background-image: url('../assets/movement_buff.png');
+        transform: scale(0.6);
 }
 
 .attack-buff.sprite-frame-1 {
