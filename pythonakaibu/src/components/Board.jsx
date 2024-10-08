@@ -32,6 +32,8 @@ const Board = () => {
     const [remainingMoves, setRemainingMoves] = useState(0);
     const [movesCount, setMovesCount] = useState({ player1: 0, player2: 0 }); // Track moves count for each player
 
+    const [coloredTiles, setColoredTiles] = useState([]);
+
     useEffect(() => {
         const player1Interval = setInterval(() => {
             setPlayer1Frame(prevFrame => (prevFrame % unitSprites.player1.totalFrames) + 1);
@@ -45,6 +47,10 @@ const Board = () => {
             clearInterval(player1Interval);
             clearInterval(player2Interval);
         };
+    }, []);
+
+    useEffect(() => {
+        generateColoredTiles();
     }, []);
 
     const rows = 8; 
@@ -67,9 +73,50 @@ const Board = () => {
         // can move adjacently (in a hexagonal way(?)) if that makes sense
     };
 
+    const generateColoredTiles = () => {
+        const enemyCount = 25; // fixed vals
+        const powerupCount = 10; // fixed vals
+
+        const occupiedTiles = [
+            `${player1Position.row}-${player1Position.col}`,
+            `${player2Position.row}-${player2Position.col}`
+        ];
+
+        const allTiles = new Set();
+
+        const availableTiles = [];
+
+        for (let row = 0; row < rows; row++) {
+            const cols = row % 2 === 0 ? 8 : 7;
+            for (let col = 0; col < cols; col++) {
+                const tileKey = `${row}-${col}`;
+                if (!occupiedTiles.includes(tileKey)) {
+                    availableTiles.push(tileKey);
+                }
+            }
+        }
+
+        for (let i = availableTiles.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [availableTiles[i], availableTiles[j]] = [availableTiles[j], availableTiles[i]];
+        }
+
+        for (let i = 0; i < enemyCount; i++) {
+            const tileKey = availableTiles[i];
+            allTiles.add({ tileKey, type: 'enemy' });
+        }
+
+        for (let i = enemyCount; i < enemyCount + powerupCount; i++) {
+            const tileKey = availableTiles[i];
+            allTiles.add({ tileKey, type: 'powerup' });
+        }
+
+        setColoredTiles(Array.from(allTiles));
+    };
+
     const handleClick = (row, col) => {
         if (!diceRolled) {
-            console.log("Roll the dice first to select a tile.");
+            console.log("Roll the dice!");
             return;
         }
 
@@ -96,6 +143,12 @@ const Board = () => {
                 setMovesCount(prevCount => ({ ...prevCount, player2: prevCount.player2 + 1 }));
                 console.log(`Player 2 moves: ${movesCount.player2 + 1}`);
             }
+
+            const landedTile = coloredTiles.find(tile => tile.tileKey === `${row}-${col}`);
+                if (landedTile) {
+                    const tileType = landedTile.type === 'enemy' ? 'enemy' : 'powerup';
+                    console.log(`Landed on a ${tileType} tile.`);
+            };
 
             setRemainingMoves(prevRemaining => prevRemaining - 1);
 
@@ -135,6 +188,9 @@ const Board = () => {
                     charasprite = <CharaSprite frame={player2Frame} type="player2" />;
                 }
 
+                const coloredTile = coloredTiles.find(tile => tile.tileKey === `${row}-${col}`);
+                const tileColor = coloredTile ? (coloredTile.type === 'enemy' ? 'skyblue' : 'purple') : 'lightgreen';
+
                 tileRow.push(
                     <Tile
                         key={`${row}-${col}`}
@@ -142,6 +198,7 @@ const Board = () => {
                         col={col}
                         handleClick={handleClick}
                         charasprite={charasprite} 
+                        color={tileColor}
                     />
                 );
             }

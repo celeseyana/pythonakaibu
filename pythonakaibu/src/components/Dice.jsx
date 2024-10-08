@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Dice.css';
 
 const Dice = ({ onRoll }) => {
     const [diceValue, setDiceValue] = useState('');
@@ -26,7 +27,7 @@ const Dice = ({ onRoll }) => {
                 onChange={handleRoll}
                 min="1"
                 max="6"
-                placeholder="Roll the Dice!"
+                placeholder="Roll!"
             />
             <img src='./src/assets/confirm.png' onClick={handleSubmit}></img>
         </div>
