@@ -83,7 +83,7 @@ export default function Map1() {
             </div>
             
             <div className="board-container">
-                <Board turnCount={turnCount} setTurnCount={setTurnCount} />
+                <Board turnCount={turnCount} setTurnCount={setTurnCount} /> 
                 <img
                     className='faq-hover absolute bottom right'
                     src='./src/assets/powerup_faq.png'
