@@ -20,7 +20,7 @@ const spritesheets = {
         path: '../assets/defense_buff.png',
         totalFrames: 4,
     },
-    speed: {
+    movement: {
         path: '../assets/movement_buff.png',
         totalFrames: 9,
     },
@@ -57,7 +57,7 @@ export default function Map1() {
         }, 100);
 
         const speedInterval = setInterval(() => {
-            setSpeedFrame(prevFrame => (prevFrame % spritesheets.speed.totalFrames) + 1);
+            setSpeedFrame(prevFrame => (prevFrame % spritesheets.movement.totalFrames) + 1);
         }, 100);
 
         return () => {
@@ -77,12 +77,21 @@ export default function Map1() {
 
     const [turnCount, setTurnCount] = useState(1); 
 
+    const [player1Powerups, setPlayer1Powerups] = useState([]);
+    const [player2Powerups, setPlayer2Powerups] = useState([]);
+    
     return (
         <>
             {showPopup && <P2Popup onUsername2Submit={handleUsername2Submit} />}
 
             <div>
-                <GameUI turnCount={turnCount} setTurnCount={setTurnCount} username2={username2} />
+                <GameUI
+                    turnCount={turnCount}
+                    setTurnCount={setTurnCount}
+                    username2={username2}
+                    player1Powerups={player1Powerups}
+                    player2Powerups={player2Powerups} 
+                />
             </div>
 
             <div>
@@ -90,7 +99,11 @@ export default function Map1() {
             </div>
             
             <div className="board-container">
-                <Board turnCount={turnCount} setTurnCount={setTurnCount} /> 
+                <Board turnCount={turnCount}
+                    setTurnCount={setTurnCount}
+                    setPlayer1Powerups={setPlayer1Powerups}
+                    setPlayer2Powerups={setPlayer2Powerups} 
+                /> 
                 <img
                     className='faq-hover absolute bottom right'
                     src='./src/assets/powerup_faq.png'

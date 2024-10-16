@@ -12,7 +12,7 @@ const spritesheets = {
         path: '../assets/defense_buff.png',
         totalFrames: 4,
     },
-    speed: {
+    movement: {
         path: '../assets/movement_buff.png',
         totalFrames: 9,
     },
@@ -33,7 +33,7 @@ export default function PowerupUI({collectedPowerups = []}) {
         }, 100);
 
         const speedInterval = setInterval(() => {
-            setSpeedFrame(prevFrame => (prevFrame % spritesheets.speed.totalFrames) + 1);
+            setSpeedFrame(prevFrame => (prevFrame % spritesheets.movement.totalFrames) + 1);
         }, 100);
 
         return () => {
@@ -57,7 +57,7 @@ export default function PowerupUI({collectedPowerups = []}) {
                         <Sprite frame={defenseFrame} type="defense" />
                     </div>
                 )}
-                {collectedPowerups.includes('speed') && (
+                {collectedPowerups.includes('movement') && (
                     <div className='sprite-container'>
                         <Sprite frame={speedFrame} type="movement" />
                     </div>

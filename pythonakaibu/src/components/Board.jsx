@@ -34,7 +34,7 @@ const spritesheets = {
     },
 };
 
-const Board = ({ turnCount, setTurnCount }) => {
+const Board = ({ turnCount, setTurnCount, setPlayer1Powerups, setPlayer2Powerups }) => {
     const [player1Frame, setPlayer1Frame] = useState(1);
     const [player1Position, setPlayer1Position] = useState({ row: 0, col: 0 });
 
@@ -54,8 +54,6 @@ const Board = ({ turnCount, setTurnCount }) => {
     const [finalTileType, setFinalTileType] = useState(null); // check final landed on tile
 
     const powerupTypes = ['attack', 'defense', 'movement']; // HONESTLY THIS WAS BUGGED I HAVE NO IDEA HOW I FIXED IT PART 2
-    const [player1Powerups, setPlayer1Powerups] = useState([]);
-    const [player2Powerups, setPlayer2Powerups] = useState([]);
     const [showPowerupPopup, setShowPowerupPopup] = useState(false);
     const [popupPowerupType, setPopupPowerupType] = useState('');
 
@@ -177,7 +175,7 @@ const Board = ({ turnCount, setTurnCount }) => {
         setDiceRolled(false); 
         setDiceValue(0);
         setRemainingMoves(0);
-        console.log('Popup Type:', popupPowerupType);
+        console.log(currentTurn, 'Popup Type:', popupPowerupType);
     };
 
     const handleClick = (row, col) => {
