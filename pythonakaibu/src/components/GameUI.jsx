@@ -5,12 +5,12 @@ import HealthBar from './HealthBar';
 import HealthBar2 from './HealthBar2';
 import PowerupUI from './PowerupUI';
 
-export default function GameUI({turnCount}) {
+export default function GameUI({ turnCount, username2 }) {
     return (
         <>
             <div>
                 <HealthBar />
-                <HealthBar2 />
+                <HealthBar2 placeholderName={username2 || 'Placeholder 2'} />
             </div>
 
             <div className='powerup-flex'>

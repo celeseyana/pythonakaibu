@@ -9,6 +9,7 @@ import Board from './Board';
 import Gamebg from './GameBG';
 import GameUI from './GameUI';
 import { ClickAwayListener } from '@mui/base/ClickAwayListener';
+import P2Popup from './P2Popup';
 
 const spritesheets = {
     attack: {
@@ -42,10 +43,6 @@ export default function Map1() {
         setOpen(false);
     };
 
-    // const [atkTooltip, setAtkTooltip] = useState("Attack Buff Tooltip");
-    // const [defTooltip, setDefTooltip] = useState("Defense Buff Tooltip");
-    // const [spdTooltip, setSpdTooltip] = useState("Speed Buff Tooltip");
-
     const [attackFrame, setAttackFrame] = useState(1);
     const [defenseFrame, setDefenseFrame] = useState(1);
     const [speedFrame, setSpeedFrame] = useState(1);
@@ -70,12 +67,22 @@ export default function Map1() {
         };
     }, []);
 
-    const [turnCount, setTurnCount] = useState(1); // Define turnCount in the parent component
+    const [username2, setUsername2] = useState('');
+    const [showPopup, setShowPopup] = useState(true); 
+
+    const handleUsername2Submit = (name) => {
+        setUsername2(name);
+        setShowPopup(false); // Hide the popup after submission
+    };
+
+    const [turnCount, setTurnCount] = useState(1); 
 
     return (
         <>
+            {showPopup && <P2Popup onUsername2Submit={handleUsername2Submit} />}
+
             <div>
-                <GameUI turnCount={turnCount} setTurnCount={setTurnCount} />
+                <GameUI turnCount={turnCount} setTurnCount={setTurnCount} username2={username2} />
             </div>
 
             <div>
