@@ -107,6 +107,8 @@ export default function Map1() {
                     setTurnCount={setTurnCount}
                     player1StockPowerup={player1StockPowerup}
                     player2StockPowerup={player2StockPowerup}
+                    player1ActivePowerup={player1ActivePowerup}
+                    player2ActivePowerup={player2ActivePowerup}
                     setPlayer1StockPowerup={setPlayer1StockPowerup}
                     setPlayer2StockPowerup={setPlayer2StockPowerup}
                     setPlayer1ActivePowerup={setPlayer1ActivePowerup}

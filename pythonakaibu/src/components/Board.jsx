@@ -34,7 +34,7 @@ const spritesheets = {
     },
 };
 
-const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPowerup, setPlayer1StockPowerup, setPlayer2StockPowerup, setPlayer1ActivePowerup, setPlayer2ActivePowerup }) => {
+const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPowerup, player1ActivePowerup, player2ActivePowerup, setPlayer1StockPowerup, setPlayer2StockPowerup, setPlayer1ActivePowerup, setPlayer2ActivePowerup }) => {
     const [player1Frame, setPlayer1Frame] = useState(1);
     const [player1Position, setPlayer1Position] = useState({ row: 0, col: 0 });
 
@@ -44,7 +44,6 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
     const [currentTurn, setCurrentTurn] = useState('player1');
 
     const [diceRolled, setDiceRolled] = useState(false);
-    const [diceValue, setDiceValue] = useState(0);
     const [remainingMoves, setRemainingMoves] = useState(0);
     const [movesCount, setMovesCount] = useState({ player1: 0, player2: 0 }); // Track moves count for each player
 
@@ -179,8 +178,6 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
         }
 
         setDiceRolled(false); 
-        setDiceValue(0);
-        setRemainingMoves(0);
         console.log(currentTurn, 'Popup Type:', popupPowerupType);
     };
 
@@ -243,9 +240,15 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
     };
 
     const handleDiceRoll = (value) => {
-        setDiceValue(value);
         setDiceRolled(true); 
-        setRemainingMoves(value); 
+        if (currentTurn === 'player1' && player1ActivePowerup === 'movement') {
+            setRemainingMoves(value + 3);
+        }
+        else if (currentTurn === 'player2' && player2ActivePowerup === 'movement') {
+            setRemainingMoves(value + 3);
+        } else {
+            setRemainingMoves(value);
+        }
         console.log(`${currentTurn} rolled a ${value}`);
     };
 
