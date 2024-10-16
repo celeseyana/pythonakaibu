@@ -178,6 +178,44 @@ const Board = ({ turnCount, setTurnCount, setPlayer1Powerups, setPlayer2Powerups
         console.log(currentTurn, 'Popup Type:', popupPowerupType);
     };
 
+    // const swapTurns = () => {
+    //     setCurrentTurn(currentTurn === 'player1' ? 'player2' : 'player1');
+    //     console.log("Player 1 has:", player1Powerups);
+    //     console.log("Player 2 has:", player2Powerups);
+
+    //     if (currentTurn === 'player2') {
+    //         setTurnCount(prevCount => {
+    //             const newTurnCount = prevCount + 1;
+
+    //             if (prevCount % 3 !== 0 && newTurnCount % 3 === 0) {
+    //                 setPlayer1Powerups(player1Powerups => {
+    //                     if (player1Powerups.length > 0) {
+    //                         console.log("Removing from player1Powerups:", player1Powerups);
+    //                         return player1Powerups.slice(1); 
+    //                     }
+    //                     return player1Powerups;
+    //                 });
+
+    //                 setPlayer2Powerups(player2Powerups => {
+    //                     if (player2Powerups.length > 0) {
+    //                         console.log("Removing from player2Powerups:", player2Powerups);
+    //                         return player2Powerups.slice(1); 
+    //                     }
+    //                     return player2Powerups; 
+    //                 });
+    //             }
+
+    //             console.log(`Turn Count: ${newTurnCount}`);
+    //             return newTurnCount;
+    //         });
+    //     }
+
+    //     setDiceRolled(false); 
+    //     setDiceValue(0);
+    //     setRemainingMoves(0);
+    //     console.log(currentTurn, 'Popup Type:', popupPowerupType);
+    // };
+
     const handleClick = (row, col) => {
         if (!diceRolled) {
             console.log("Roll the dice!");

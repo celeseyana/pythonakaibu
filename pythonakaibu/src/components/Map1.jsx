@@ -79,7 +79,7 @@ export default function Map1() {
 
     const [player1Powerups, setPlayer1Powerups] = useState([]);
     const [player2Powerups, setPlayer2Powerups] = useState([]);
-    
+
     return (
         <>
             {showPopup && <P2Popup onUsername2Submit={handleUsername2Submit} />}
@@ -103,6 +103,8 @@ export default function Map1() {
                     setTurnCount={setTurnCount}
                     setPlayer1Powerups={setPlayer1Powerups}
                     setPlayer2Powerups={setPlayer2Powerups} 
+                    player1Powerups={player1Powerups}
+                    player2Powerups={player2Powerups} 
                 /> 
                 <img
                     className='faq-hover absolute bottom right'

@@ -9,7 +9,8 @@ import axios from 'axios';
 
 export default function GameUI({ turnCount, username2, player1Powerups, player2Powerups }) {
     const [name, setName] = useState('');
-
+    // console.log("Player 1 has:", player1Powerups);
+    // console.log("Player 2 has:", player2Powerups);
     axios.defaults.withCredentials = true;
 
     useEffect(() => {
