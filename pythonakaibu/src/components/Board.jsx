@@ -34,6 +34,9 @@ const Board = ({ turnCount, setTurnCount }) => {
 
     const [coloredTiles, setColoredTiles] = useState([]);
 
+    const [showQuestionPopup, setShowQuestionPopup] = useState(false); // ques handler
+    const [finalTileType, setFinalTileType] = useState(null); // check final landed on tile
+
     useEffect(() => {
         const player1Interval = setInterval(() => {
             setPlayer1Frame(prevFrame => (prevFrame % unitSprites.player1.totalFrames) + 1);
@@ -114,6 +117,17 @@ const Board = ({ turnCount, setTurnCount }) => {
         setColoredTiles(Array.from(allTiles));
     };
 
+    const swapTurns = () => {
+        setCurrentTurn(currentTurn === 'player1' ? 'player2' : 'player1');
+        if (currentTurn === 'player2') {
+            setTurnCount(prevCount => prevCount + 1);
+            console.log(`Turn Count: ${turnCount + 1}`);
+        }
+        setDiceRolled(false); // Reset dice for next turn
+        setDiceValue(0);
+        setRemainingMoves(0);
+    };
+
     const handleClick = (row, col) => {
         if (!diceRolled) {
             console.log("Roll the dice!");
@@ -144,24 +158,22 @@ const Board = ({ turnCount, setTurnCount }) => {
                 console.log(`Player 2 moves: ${movesCount.player2 + 1}`);
             }
 
-            const landedTile = coloredTiles.find(tile => tile.tileKey === `${row}-${col}`);
-                if (landedTile) {
-                    const tileType = landedTile.type === 'enemy' ? 'enemy' : 'powerup';
-                    console.log(`Landed on a ${tileType} tile.`);
-            };
-
             setRemainingMoves(prevRemaining => prevRemaining - 1);
 
             if (remainingMoves - 1 === 0) {
-                console.log(`${currentTurn} has completed their move!`);
-                setCurrentTurn(currentTurn === 'player1' ? 'player2' : 'player1');
-                if (currentTurn === 'player2') {
-                    setTurnCount(prevCount => prevCount + 1); // Lift the turn count up
-                    console.log(`Turn Count: ${turnCount + 1}`);
-                }
-                setDiceRolled(false); 
-                setDiceValue(0); 
-                setRemainingMoves(0); 
+                const landedTile = coloredTiles.find(tile => tile.tileKey === `${row}-${col}`);
+                if (landedTile) {
+                    const tileType = landedTile.type
+                    console.log(`Landed on a ${tileType} tile.`);
+                    setFinalTileType(tileType);
+                    if (tileType === 'enemy') {
+                        setShowQuestionPopup(true);
+                    } else {
+                        swapTurns();
+                    }
+                } else {
+                    swapTurns();
+                };
             }
         } else {
             console.log("You can only move to connected tiles.");
@@ -223,6 +235,19 @@ const Board = ({ turnCount, setTurnCount }) => {
             <div className="dice-container absolute center">
                 <Dice onRoll={handleDiceRoll} />
             </div>
+
+            {showQuestionPopup && (
+                <div className="enemy-popup-overlay">
+                    <div className="enemy-popup-box">
+                        <h3>Enemy Encounter!</h3>
+                        <p>You encountered an enemy!</p>
+                        <button onClick={() => {
+                            setShowQuestionPopup(false);  // Close the popup
+                            swapTurns();          // Swap turns after closing
+                        }}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 };
