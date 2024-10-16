@@ -77,8 +77,10 @@ export default function Map1() {
 
     const [turnCount, setTurnCount] = useState(1); 
 
-    const [player1Powerups, setPlayer1Powerups] = useState([]);
-    const [player2Powerups, setPlayer2Powerups] = useState([]);
+    const [player1StockPowerup, setPlayer1StockPowerup] = useState("");
+    const [player2StockPowerup, setPlayer2StockPowerup] = useState("");
+    const [player1ActivePowerup, setPlayer1ActivePowerup] = useState("");
+    const [player2ActivePowerup, setPlayer2ActivePowerup] = useState("");
 
     return (
         <>
@@ -89,8 +91,10 @@ export default function Map1() {
                     turnCount={turnCount}
                     setTurnCount={setTurnCount}
                     username2={username2}
-                    player1Powerups={player1Powerups}
-                    player2Powerups={player2Powerups} 
+                    player1StockPowerup={player1StockPowerup}
+                    player2StockPowerup={player2StockPowerup}
+                    player1ActivePowerup={player1ActivePowerup}
+                    player2ActivePowerup={player2ActivePowerup}
                 />
             </div>
 
@@ -101,10 +105,12 @@ export default function Map1() {
             <div className="board-container">
                 <Board turnCount={turnCount}
                     setTurnCount={setTurnCount}
-                    setPlayer1Powerups={setPlayer1Powerups}
-                    setPlayer2Powerups={setPlayer2Powerups} 
-                    player1Powerups={player1Powerups}
-                    player2Powerups={player2Powerups} 
+                    player1StockPowerup={player1StockPowerup}
+                    player2StockPowerup={player2StockPowerup}
+                    setPlayer1StockPowerup={setPlayer1StockPowerup}
+                    setPlayer2StockPowerup={setPlayer2StockPowerup}
+                    setPlayer1ActivePowerup={setPlayer1ActivePowerup}
+                    setPlayer2ActivePowerup={setPlayer2ActivePowerup}
                 /> 
                 <img
                     className='faq-hover absolute bottom right'

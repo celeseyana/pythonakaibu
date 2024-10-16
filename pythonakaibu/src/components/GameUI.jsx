@@ -7,10 +7,8 @@ import PowerupUI from './PowerupUI';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function GameUI({ turnCount, username2, player1Powerups, player2Powerups }) {
+export default function GameUI({ turnCount, username2, player1StockPowerup, player2StockPowerup, player1ActivePowerup, player2ActivePowerup }) {
     const [name, setName] = useState('');
-    // console.log("Player 1 has:", player1Powerups);
-    // console.log("Player 2 has:", player2Powerups);
     axios.defaults.withCredentials = true;
 
     useEffect(() => {
@@ -28,8 +26,8 @@ export default function GameUI({ turnCount, username2, player1Powerups, player2P
             </div>
 
             <div className='powerup-flex'>
-                <PowerupUI collectedPowerups={player1Powerups} />
-                <PowerupUI collectedPowerups={player2Powerups} />
+                <PowerupUI collectedPowerups={[player1ActivePowerup, player1StockPowerup]} />
+                <PowerupUI collectedPowerups={[player2ActivePowerup, player2StockPowerup]} />
             </div>
 
             <div className='turn-counter center'>

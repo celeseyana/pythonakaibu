@@ -34,7 +34,7 @@ const spritesheets = {
     },
 };
 
-const Board = ({ turnCount, setTurnCount, setPlayer1Powerups, setPlayer2Powerups, player1Powerups, player2Powerups }) => {
+const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPowerup, setPlayer1StockPowerup, setPlayer2StockPowerup, setPlayer1ActivePowerup, setPlayer2ActivePowerup }) => {
     const [player1Frame, setPlayer1Frame] = useState(1);
     const [player1Position, setPlayer1Position] = useState({ row: 0, col: 0 });
 
@@ -75,9 +75,9 @@ const Board = ({ turnCount, setTurnCount, setPlayer1Powerups, setPlayer2Powerups
 
     const setCollectedPowerups = (player, powerup) => {
         if (player === 'player1') {
-            setPlayer1Powerups(prev => [...prev, powerup]);
+            setPlayer1StockPowerup(powerup);
         } else {
-            setPlayer2Powerups(prev => [...prev, powerup]);
+            setPlayer2StockPowerup(powerup);
         }
     };
 
@@ -166,52 +166,22 @@ const Board = ({ turnCount, setTurnCount, setPlayer1Powerups, setPlayer2Powerups
         setColoredTiles(Array.from(allTiles));
     };
 
-    // const swapTurns = () => {
-    //     setCurrentTurn(currentTurn === 'player1' ? 'player2' : 'player1');
-    //     if (currentTurn === 'player2') {
-    //         setTurnCount(prevCount => prevCount + 1);
-    //         console.log(`Turn Count: ${turnCount + 1}`);
-    //     }
-    //     setDiceRolled(false); 
-    //     setDiceValue(0);
-    //     setRemainingMoves(0);
-    //     console.log(currentTurn, 'Popup Type:', popupPowerupType);
-    // };
-
     const swapTurns = () => {
-        const nextTurn = currentTurn === 'player1' ? 'player2' : 'player1';
-        setCurrentTurn(nextTurn);
+        setCurrentTurn(currentTurn === 'player1' ? 'player2' : 'player1');
 
         if (currentTurn === 'player2') {
-            setTurnCount(prevCount => {
-                const newTurnCount = prevCount + 1; 
-
-                if (newTurnCount % 3 === 0) {
-                    setPlayer1Powerups(player1Powerups => {
-                        if (player1Powerups.length > 0) {
-                            return player1Powerups.slice(1); 
-                        }
-                        return player1Powerups; 
-                    });
-
-                    setPlayer2Powerups(player2Powerups => {
-                        if (player2Powerups.length > 0) {
-                            return player2Powerups.slice(1); 
-                        }
-                        return player2Powerups; 
-                    });
-                }
-
-                console.log(`Turn Count: ${newTurnCount}`);
-                console.log("Player 1 has:", player1Powerups);
-                console.log("Player 2 has:", player2Powerups);
-                return newTurnCount;
-            });
+            setPlayer1ActivePowerup(player1StockPowerup);
+            setPlayer1StockPowerup("");
+            setPlayer2ActivePowerup(player2StockPowerup);
+            setPlayer2StockPowerup("");
+            setTurnCount(prevCount => prevCount + 1);
+            console.log(`Turn Count: ${turnCount + 1}`);
         }
 
-        setDiceRolled(false);
+        setDiceRolled(false); 
         setDiceValue(0);
         setRemainingMoves(0);
+        console.log(currentTurn, 'Popup Type:', popupPowerupType);
     };
 
     const handleClick = (row, col) => {
