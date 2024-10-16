@@ -18,7 +18,7 @@ const spritesheets = {
     },
 };
 
-export default function PowerupUI() {
+export default function PowerupUI({collectedPowerups = []}) {
     const [attackFrame, setAttackFrame] = useState(1);
     const [defenseFrame, setDefenseFrame] = useState(1);
     const [speedFrame, setSpeedFrame] = useState(1);
@@ -47,15 +47,21 @@ export default function PowerupUI() {
         <div className='powerup-gui'>
             <span className='active-text'>Active</span>
             <div className='sprites'>
-                <div className='sprite-container'>
-                    <Sprite frame={attackFrame} type="attack" />
-                </div>
-                <div className='sprite-container'>
-                    <Sprite frame={defenseFrame} type="defense" />
-                </div>
-                <div className='sprite-container'>
-                    <Sprite frame={speedFrame} type="movement" />
-                </div>
+                {collectedPowerups.includes('attack') && (
+                    <div className='sprite-container'>
+                        <Sprite frame={attackFrame} type="attack" />
+                    </div>
+                )}
+                {collectedPowerups.includes('defense') && (
+                    <div className='sprite-container'>
+                        <Sprite frame={defenseFrame} type="defense" />
+                    </div>
+                )}
+                {collectedPowerups.includes('speed') && (
+                    <div className='sprite-container'>
+                        <Sprite frame={speedFrame} type="movement" />
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Tile from "./Tile"; 
 import CharaSprite from "./CharaSpriteReader";
 import Dice from "./Dice";
+import Sprite from "./SpriteReader";
 import './Board.css';
 import 'beercss';
 
@@ -16,6 +17,21 @@ const unitSprites = {
         totalFrames: 5,
     },
 
+};
+
+const spritesheets = {
+    attack: {
+        path: '../assets/atk_buff.png',
+        totalFrames: 7,
+    },
+    defense: {
+        path: '../assets/defense_buff.png',
+        totalFrames: 4,
+    },
+    movement: { // HONESTLY THIS WAS BUGGED I HAVE NO IDEA HOW I FIXED IT PART 1
+        path: '../assets/movement_buff.png',
+        totalFrames: 9,
+    },
 };
 
 const Board = ({ turnCount, setTurnCount }) => {
@@ -36,6 +52,41 @@ const Board = ({ turnCount, setTurnCount }) => {
 
     const [showQuestionPopup, setShowQuestionPopup] = useState(false); // ques handler
     const [finalTileType, setFinalTileType] = useState(null); // check final landed on tile
+
+    const powerupTypes = ['attack', 'defense', 'movement']; // HONESTLY THIS WAS BUGGED I HAVE NO IDEA HOW I FIXED IT PART 2
+    const [player1Powerups, setPlayer1Powerups] = useState([]);
+    const [player2Powerups, setPlayer2Powerups] = useState([]);
+    const [showPowerupPopup, setShowPowerupPopup] = useState(false);
+    const [popupPowerupType, setPopupPowerupType] = useState('');
+
+    const [frame, setFrame] = useState(1); // State for the sprite frame
+
+    useEffect(() => {
+        let frameInterval;
+
+        if (showPowerupPopup) {
+            frameInterval = setInterval(() => {
+                setFrame(prevFrame => (prevFrame % spritesheets[popupPowerupType].totalFrames) + 1);
+            }, 100); 
+        }
+
+        return () => {
+            clearInterval(frameInterval);
+        };
+    }, [showPowerupPopup, popupPowerupType]); 
+
+    const setCollectedPowerups = (player, powerup) => {
+        if (player === 'player1') {
+            setPlayer1Powerups(prev => [...prev, powerup]);
+        } else {
+            setPlayer2Powerups(prev => [...prev, powerup]);
+        }
+    };
+
+    const handlePowerupPopup = (show, powerupType = '') => {
+        setShowPowerupPopup(show);
+        setPopupPowerupType(powerupType);
+    };
 
     useEffect(() => {
         const player1Interval = setInterval(() => {
@@ -123,9 +174,10 @@ const Board = ({ turnCount, setTurnCount }) => {
             setTurnCount(prevCount => prevCount + 1);
             console.log(`Turn Count: ${turnCount + 1}`);
         }
-        setDiceRolled(false); // Reset dice for next turn
+        setDiceRolled(false); 
         setDiceValue(0);
         setRemainingMoves(0);
+        console.log('Popup Type:', popupPowerupType);
     };
 
     const handleClick = (row, col) => {
@@ -166,9 +218,15 @@ const Board = ({ turnCount, setTurnCount }) => {
                     const tileType = landedTile.type
                     console.log(`Landed on a ${tileType} tile.`);
                     setFinalTileType(tileType);
+
                     if (tileType === 'enemy') {
                         setShowQuestionPopup(true);
-                    } else {
+                    } else if (tileType === 'powerup') {
+                        const randomPowerup = powerupTypes[Math.floor(Math.random() * powerupTypes.length)];
+                        setCollectedPowerups(currentTurn, randomPowerup);
+                        handlePowerupPopup(true, randomPowerup);
+                    }
+                    else {
                         swapTurns();
                     }
                 } else {
@@ -242,8 +300,24 @@ const Board = ({ turnCount, setTurnCount }) => {
                         <h3>Enemy Encounter!</h3>
                         <p>You encountered an enemy!</p>
                         <button onClick={() => {
-                            setShowQuestionPopup(false);  // Close the popup
-                            swapTurns();          // Swap turns after closing
+                            setShowQuestionPopup(false);  
+                            swapTurns();          
+                        }}>Close</button>
+                    </div>
+                </div>
+            )}
+
+            {showPowerupPopup && (
+                <div className="powerup-popup-overlay">
+                    <div className="powerup-popup-box absolute center">
+                        <h3>Power-up Found!</h3>
+                        <p>You found a {popupPowerupType} power-up!</p>
+                        <div className="powerup-popup-sprite-container">
+                            <Sprite className='powerup-popup-sprite' frame={frame} type={popupPowerupType} />
+                        </div>
+                        <button onClick={() => {
+                            setShowPowerupPopup(false);  
+                            swapTurns(); 
                         }}>Close</button>
                     </div>
                 </div>
