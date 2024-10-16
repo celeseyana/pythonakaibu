@@ -301,7 +301,7 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
                 <Dice onRoll={handleDiceRoll} />
             </div>
 
-            {showQuestionPopup && (
+            {showQuestionPopup && ( // add the enemy thing here
                 <div className="enemy-popup-overlay">
                     <div className="enemy-popup-box">
                         <h3>Enemy Encounter!</h3>
