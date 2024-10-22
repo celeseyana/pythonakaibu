@@ -89,7 +89,8 @@
     margin: 10px;
 }
 
-.enemy-popup-overlay {
+.enemy-popup-overlay,
+.attacking-popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -102,16 +103,18 @@
     z-index: 999;
 }
 
-.enemy-popup-box {
+.enemy-popup-box,
+.attacking-popup-box {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
-    width: 300px;
+    width: fit-content;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
-.enemy-popup-box h3 {
+.enemy-popup-box h3,
+.attacking-popup-box h3 {
     margin-top: 0;
 }
 
@@ -142,4 +145,14 @@
     justify-content: center;
     align-items: center;
     margin: 10px 0;
+}
+
+.mcq-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.mcq-box button {
+    margin: 10px;
+    padding: 10px;
 }

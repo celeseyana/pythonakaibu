@@ -53,6 +53,9 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
     const [showQuestionPopup, setShowQuestionPopup] = useState(false); // ques handler
     const [question, setQuestion] = useState("");
     const [loading, setLoading] = useState(true);
+    const [selectedAns, setSelectedAns] = useState(""); // user's answer
+    const [showAttackingPopup, setShowAttackingPopup] = useState(false); // attacking handler
+
 
     const [finalTileType, setFinalTileType] = useState(null); // check final landed on tile
 
@@ -304,6 +307,21 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
         console.log(response.data);
     }
 
+    const ansSelection = (ans) => {
+        setSelectedAns(ans);
+        console.log("Selected Answer: ", ans);
+
+        if (ans === question.correct_ans) {
+            console.log("ure correct vro");
+            setShowQuestionPopup(false);
+            setShowAttackingPopup(true);
+        } else {
+            console.log("ah hell naur bro fumbled");
+            setShowQuestionPopup(false);  
+            swapTurns();
+        }
+    }
+
     return (
         <div className="game-container"> 
             <div className="board">
@@ -313,20 +331,33 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
                 <Dice onRoll={handleDiceRoll} />
             </div>
 
-            <button onClick={quizTest}>test btn</button>
+            {/* <button onClick={quizTest}>test btn</button> */}
 
             {showQuestionPopup && ( // add the enemy thing here
                 <div className="enemy-popup-overlay">
                     <div className="enemy-popup-box">
                         <h3>Attacking Chance!</h3>
-                        <p>{question.ques_text}</p> 
-                        <ul>
+                        <p>{question.ques_text}</p>
+                        {/* <button onClick={ansSelection}></button> */}
+                        <div className="mcq-box">
                             {question?.poss_ans?.map((ans, index) => (
-                                <li key={index}>{ans}</li>
+                                <button onClick={() => ansSelection(ans)} key={index}>{ans}</button>
                             ))}
-                        </ul>
+                        </div>
                         <button onClick={() => {
                             setShowQuestionPopup(false);  
+                            swapTurns();          
+                        }}>Close</button>
+                    </div>
+                </div>
+            )}
+
+            {showAttackingPopup && ( // add the attack procs thing here
+                <div className="attacking-popup-overlay">
+                    <div className="attacking-popup-box">
+                        <h3>attacking opponent box</h3>
+                        <button onClick={() => {
+                            setShowAttackingPopup(false);  
                             swapTurns();          
                         }}>Close</button>
                     </div>
