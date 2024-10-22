@@ -38,6 +38,36 @@ const verifyUser = (req, res, next) => {
     }
 }
 
+app.get('/api/quizdata', (req, res) => {
+    const randomQuestionQuery = `
+        SELECT q.id AS question_id, q.question_text, a.id AS answer_id, a.answer_text, a.is_correct
+        FROM questions q
+        LEFT JOIN answers a ON q.id = a.question_id
+        ORDER BY RAND() LIMIT 1
+    `;
+
+    db.query(randomQuestionQuery, (err, results) => {
+        if (err) return res.status(500).send(err);
+
+        if (results.length > 0) {
+            const quizdata = {
+                id: results[0].question_id,
+                text: results[0].question_text,
+                answers: results
+                    .filter(result => result.question_id === results[0].question_id)  // Only answers for this question
+                    .map(result => ({
+                        id: result.answer_id,  // Answer ID
+                        text: result.answer_text,  // Answer text
+                        is_correct: result.is_correct  // Boolean indicating correct answer
+                })),
+            };
+            res.json(quizdata);
+        } else {
+            res.status(404).send('No questions found');
+        }
+    });
+});
+
 app.get('/',verifyUser, (req, res) => {
     return res.json({Status: "Success", name: req.name})
 })

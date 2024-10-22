@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import Tile from "./Tile"; 
 import CharaSprite from "./CharaSpriteReader";
@@ -50,6 +51,10 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
     const [coloredTiles, setColoredTiles] = useState([]);
 
     const [showQuestionPopup, setShowQuestionPopup] = useState(false); // ques handler
+    const [question, setQuestion] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
     const [finalTileType, setFinalTileType] = useState(null); // check final landed on tile
 
     const powerupTypes = ['attack', 'defense', 'movement']; // HONESTLY THIS WAS BUGGED I HAVE NO IDEA HOW I FIXED IT PART 2
@@ -292,6 +297,14 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
         return tiles;
     };
 
+    const quizTest = async () => {
+        const response = await axios.get('http://localhost:8081/api/quizdata');
+        // console.log(response);
+        setQuestion(response.data);
+        setLoading(false);
+        console.log(question);
+    }
+
     return (
         <div className="game-container"> 
             <div className="board">
@@ -301,11 +314,13 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
                 <Dice onRoll={handleDiceRoll} />
             </div>
 
+            <button onClick={quizTest}>test btn</button>
+
             {showQuestionPopup && ( // add the enemy thing here
                 <div className="enemy-popup-overlay">
                     <div className="enemy-popup-box">
                         <h3>Enemy Encounter!</h3>
-                        <p>You encountered an enemy!</p>
+                        <p>{question}</p>
                         <button onClick={() => {
                             setShowQuestionPopup(false);  
                             swapTurns();          
