@@ -27,7 +27,7 @@
 /* p1 */
 .player1 {
     background-image: url('../assets/p1chara.png');
-    transform: scale(1.2);
+    transform: scale(1.6);
 }
 
 .player1.sprite-frame-1 {
@@ -53,6 +53,7 @@
 /* p2 */
 .player2 {
     background-image: url('../assets/p2chara.png');
+    transform: scale(1.6) scaleX(-1);
 }
 
 .player2.sprite-frame-1 {
@@ -103,12 +104,20 @@
     z-index: 999;
 }
 
-.enemy-popup-box,
-.attacking-popup-box {
+.enemy-popup-box{
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
     width: fit-content;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.attacking-popup-box {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
@@ -155,4 +164,16 @@
 .mcq-box button {
     margin: 10px;
     padding: 10px;
+}
+
+.attacking-sprites {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5%;
+}
+
+.yuh {
+    transform: scale(10);
+    transform-origin: center;
 }

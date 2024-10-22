@@ -351,7 +351,10 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
             {showAttackingPopup && ( // add the attack procs thing here
                 <div className="attacking-popup-overlay">
                     <div className="attacking-popup-box">
-                        <h3>attacking opponent box</h3>
+                        <div className="attacking-sprites">
+                            <CharaSprite frame={player1Frame} type="player1" />
+                            <CharaSprite frame={player2Frame} type="player2" />
+                        </div>    
                         <button onClick={() => {
                             setShowAttackingPopup(false);  
                             swapTurns();          
