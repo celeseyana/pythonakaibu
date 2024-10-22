@@ -51,9 +51,8 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
     const [coloredTiles, setColoredTiles] = useState([]);
 
     const [showQuestionPopup, setShowQuestionPopup] = useState(false); // ques handler
-    const [question, setQuestion] = useState(null);
+    const [question, setQuestion] = useState("");
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     const [finalTileType, setFinalTileType] = useState(null); // check final landed on tile
 
@@ -226,6 +225,7 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
                     setFinalTileType(tileType);
 
                     if (tileType === 'enemy') {
+                        quizTest();
                         setShowQuestionPopup(true);
                     } else if (tileType === 'powerup') {
                         const randomPowerup = powerupTypes[Math.floor(Math.random() * powerupTypes.length)];
@@ -299,10 +299,9 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
 
     const quizTest = async () => {
         const response = await axios.get('http://localhost:8081/api/quizdata');
-        // console.log(response);
         setQuestion(response.data);
         setLoading(false);
-        console.log(question);
+        console.log(response.data);
     }
 
     return (
@@ -319,8 +318,13 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
             {showQuestionPopup && ( // add the enemy thing here
                 <div className="enemy-popup-overlay">
                     <div className="enemy-popup-box">
-                        <h3>Enemy Encounter!</h3>
-                        <p>{question}</p>
+                        <h3>Attacking Chance!</h3>
+                        <p>{question.ques_text}</p> 
+                        <ul>
+                            {question?.poss_ans?.map((ans, index) => (
+                                <li key={index}>{ans}</li>
+                            ))}
+                        </ul>
                         <button onClick={() => {
                             setShowQuestionPopup(false);  
                             swapTurns();          

@@ -40,26 +40,32 @@ const verifyUser = (req, res, next) => {
 
 app.get('/api/quizdata', (req, res) => {
     const randomQuestionQuery = `
-        SELECT q.id AS question_id, q.question_text, a.id AS answer_id, a.answer_text, a.is_correct
-        FROM questions q
-        LEFT JOIN answers a ON q.id = a.question_id
-        ORDER BY RAND() LIMIT 1
+        SELECT 
+            q.id,
+            q.question_text,  
+            a.answer_text,       
+            a.is_correct
+        FROM 
+            questions q
+        JOIN 
+            answers a 
+            ON q.id = a.question_id       
+        WHERE
+            q.id = (
+                SELECT id
+                FROM (SELECT q2.id FROM questions q2 ORDER BY RAND() LIMIT 1) AS random_question
+            );
     `;
 
     db.query(randomQuestionQuery, (err, results) => {
         if (err) return res.status(500).send(err);
-
+        
         if (results.length > 0) {
             const quizdata = {
-                id: results[0].question_id,
-                text: results[0].question_text,
-                answers: results
-                    .filter(result => result.question_id === results[0].question_id)  // Only answers for this question
-                    .map(result => ({
-                        id: result.answer_id,  // Answer ID
-                        text: result.answer_text,  // Answer text
-                        is_correct: result.is_correct  // Boolean indicating correct answer
-                })),
+                ques_id: results[0].id,
+                ques_text: results[0].question_text,
+                poss_ans: results.map(result => result.answer_text),
+                correct_ans: results.find(result => result.is_correct === 1).answer_text
             };
             res.json(quizdata);
         } else {
