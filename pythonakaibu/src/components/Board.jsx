@@ -344,10 +344,6 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
                                 <button onClick={() => ansSelection(ans)} key={index}>{ans}</button>
                             ))}
                         </div>
-                        <button onClick={() => {
-                            setShowQuestionPopup(false);  
-                            swapTurns();          
-                        }}>Close</button>
                     </div>
                 </div>
             )}
