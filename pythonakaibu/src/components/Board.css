@@ -114,12 +114,13 @@
 }
 
 .attacking-popup-box {
-    background-color: #fff;
-    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10%;
     padding: 20px;
     width: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     text-align: center;
+    border: 1px solid #ff0000;
 }
 
 .enemy-popup-box h3,
@@ -176,4 +177,11 @@
 .yuh {
     transform: scale(10);
     transform-origin: center;
+}
+
+.attacking-dice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

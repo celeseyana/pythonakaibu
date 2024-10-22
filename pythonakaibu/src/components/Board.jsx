@@ -352,8 +352,14 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
                 <div className="attacking-popup-overlay">
                     <div className="attacking-popup-box">
                         <div className="attacking-sprites">
-                            <CharaSprite frame={player1Frame} type="player1" />
-                            <CharaSprite frame={player2Frame} type="player2" />
+                            <div className="attacking-dice">
+                                <Dice onRoll={handleDiceRoll} />
+                                <CharaSprite frame={player1Frame} type="player1" />
+                            </div>
+                            <div className="attacking-dice">
+                                <Dice onRoll={handleDiceRoll} />
+                                <CharaSprite frame={player2Frame} type="player2" />
+                            </div>
                         </div>    
                         <button onClick={() => {
                             setShowAttackingPopup(false);  

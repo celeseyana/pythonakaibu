@@ -20,7 +20,6 @@ const Dice = ({ onRoll }) => {
 
     return (
         <div className='dice-container'>
-            <span>Roll the Dice!</span>
             <input
                 type="number"
                 value={diceValue}
