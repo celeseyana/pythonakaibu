@@ -2,7 +2,7 @@ import 'beercss';
 import './HealthBar.css'
 import React from 'react'
 
-const HealthBar = ({ maxHp = 100, hp = 100, name } = {}) => {
+const HealthBar = ({ maxHp = 100, hp, name } = {}) => {
     const barWidth = (hp / maxHp) * 100;
 
     return (

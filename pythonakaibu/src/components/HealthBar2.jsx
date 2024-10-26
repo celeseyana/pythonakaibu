@@ -2,7 +2,7 @@ import 'beercss';
 import './HealthBar2.css'
 import React from 'react'
 
-const HealthBar2 = ({ maxHp2 = 100, hp2 = 100, placeholderName="Placeholder 2"} = {}) => {
+const HealthBar2 = ({ maxHp2 = 100, hp2, placeholderName="Placeholder 2"} = {}) => {
     const barWidth = (hp2 / maxHp2) * 100;
     return (
         <div className='health-bar-container2 absolute right top'>

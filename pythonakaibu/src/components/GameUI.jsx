@@ -7,7 +7,7 @@ import PowerupUI from './PowerupUI';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function GameUI({ turnCount, username2, player1StockPowerup, player2StockPowerup, player1ActivePowerup, player2ActivePowerup }) {
+export default function GameUI({ player1Hp, player2Hp, turnCount, username2, player1StockPowerup, player2StockPowerup, player1ActivePowerup, player2ActivePowerup }) {
     const [name, setName] = useState('');
     axios.defaults.withCredentials = true;
 
@@ -21,8 +21,8 @@ export default function GameUI({ turnCount, username2, player1StockPowerup, play
     return (
         <>
             <div>
-                <HealthBar name={name} />
-                <HealthBar2 placeholderName={username2 || 'Placeholder 2'} />
+                <HealthBar name={name} hp={player1Hp} />
+                <HealthBar2 placeholderName={username2 || 'Placeholder 2'} hp2={player2Hp} />
             </div>
 
             <div className='powerup-flex'>

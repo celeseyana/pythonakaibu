@@ -37,7 +37,19 @@ const spritesheets = {
     },
 };
 
-const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPowerup, player1ActivePowerup, player2ActivePowerup, setPlayer1StockPowerup, setPlayer2StockPowerup, setPlayer1ActivePowerup, setPlayer2ActivePowerup }) => {
+const Board = ({
+    turnCount,
+    setTurnCount,
+    player1StockPowerup,
+    player2StockPowerup,
+    player1ActivePowerup,
+    player2ActivePowerup,
+    setPlayer1StockPowerup,
+    setPlayer2StockPowerup,
+    setPlayer1ActivePowerup,
+    setPlayer2ActivePowerup,
+    setPlayer1Hp,
+    setPlayer2Hp }) => {
     const [player1Frame, setPlayer1Frame] = useState(1);
     const [player1Position, setPlayer1Position] = useState({ row: 0, col: 0 });
 
@@ -65,10 +77,11 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
     const [showPowerupPopup, setShowPowerupPopup] = useState(false);
     const [popupPowerupType, setPopupPowerupType] = useState('');
 
-    const [player1AttackDmg, setPlayer1AttackDmg] = useState(0);
-    const [player2AttackDmg, setPlayer2AttackDmg] = useState(0);
-    const [player1DefenseAmt, setPlayer1DefenseAmt] = useState(0);
-    const [player2DefenseAmt, setPlayer2DefenseAmt] = useState(0);
+    const [attackDmg, setAttackDmg] = useState(0);
+    const [defenseAmt, setDefenseAmt] = useState(0);
+
+    const [hasPlayer1Rolled, setHasPlayer1Rolled] = useState(false);
+    const [hasPlayer2Rolled, setHasPlayer2Rolled] = useState(false);
 
     const [frame, setFrame] = useState(1); // State for the sprite frame
 
@@ -255,24 +268,67 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
     };
 
     const handleAttackRoll = (atkValue) => {
+        setAttackDmg(atkValue);
         if (currentTurn === 'player1') {
-            setPlayer1AttackDmg(atkValue);
             console.log("Player 1's Attack Damage: ", atkValue);
+            setHasPlayer1Rolled(true);
+            checkRollsComplete(true, hasPlayer2Rolled, atkValue, defenseAmt);
         } else {
-            setPlayer2AttackDmg(atkValue);
             console.log("Player 2's Attack Damage: ", atkValue);
+            setHasPlayer2Rolled(true);
+            checkRollsComplete(hasPlayer1Rolled, true, atkValue, defenseAmt);
         }
     }
 
     const handleDefenseRoll = (defValue) => {
+        setDefenseAmt(defValue);
         if (currentTurn === 'player1') {
-            setPlayer2DefenseAmt(defValue);
             console.log("Player 2's Defense: ", defValue);
+            setHasPlayer2Rolled(true);
+            checkRollsComplete(hasPlayer1Rolled, true, attackDmg, defValue);
         } else {
-            setPlayer1DefenseAmt(defValue);
             console.log("Player 1's Defense: ", defValue);
+            setHasPlayer1Rolled(true);
+            checkRollsComplete(true, hasPlayer2Rolled, attackDmg, defValue);
         }
     }
+
+    const checkRollsComplete = (player1Rolled, player2Rolled, atkValue, defValue) => {
+        console.log(player1Rolled, player2Rolled);
+        if (player1Rolled && player2Rolled) {
+            handleDamageCalculation(atkValue, defValue);
+            setShowAttackingPopup(false);
+            swapTurns(); 
+            resetRolls(); 
+        }
+    };
+
+    const handleDamageCalculation = (atkValue, defValue) => {
+        if (currentTurn === 'player1') {
+            const damageToPlayer2 = Math.max(atkValue - defValue, 0);
+            if (damageToPlayer2 > 0) {
+                setPlayer2Hp(prevHp => Math.max(prevHp - damageToPlayer2, 0)); // Subtract damage from Player 2's HP
+                console.log("Player 2 takes damage: ", damageToPlayer2);
+            } else {
+                console.log("Player 2 successfully defended!");
+            }
+        } else {
+            const damageToPlayer1 = Math.max(atkValue - defValue, 0);
+            if (damageToPlayer1 > 0) {
+                setPlayer1Hp(prevHp => Math.max(prevHp - damageToPlayer1, 0)); // Subtract damage from Player 1's HP
+                console.log("Player 1 takes damage: ", damageToPlayer1);
+            } else {
+                console.log("Player 1 successfully defended!");
+            }
+        }
+    };
+
+    const resetRolls = () => {
+        setHasPlayer1Rolled(false);
+        setHasPlayer2Rolled(false);
+        setAttackDmg(0);
+        setDefenseAmt(0);
+    };
 
     const handleDiceRoll = (value) => {
         setDiceRolled(true);

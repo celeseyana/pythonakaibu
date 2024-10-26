@@ -76,6 +76,8 @@ export default function Map1() {
     };
 
     const [turnCount, setTurnCount] = useState(1); 
+    const [player1Hp, setPlayer1Hp] = useState(100);
+    const [player2Hp, setPlayer2Hp] = useState(100); 
 
     const [player1StockPowerup, setPlayer1StockPowerup] = useState("");
     const [player2StockPowerup, setPlayer2StockPowerup] = useState("");
@@ -88,6 +90,8 @@ export default function Map1() {
 
             <div>
                 <GameUI
+                    player1Hp={player1Hp}
+                    player2Hp={player2Hp}
                     turnCount={turnCount}
                     setTurnCount={setTurnCount}
                     username2={username2}
@@ -103,7 +107,10 @@ export default function Map1() {
             </div>
             
             <div className="board-container">
-                <Board turnCount={turnCount}
+                <Board
+                    setPlayer1Hp={setPlayer1Hp}
+                    setPlayer2Hp={setPlayer2Hp}
+                    turnCount={turnCount}
                     setTurnCount={setTurnCount}
                     player1StockPowerup={player1StockPowerup}
                     player2StockPowerup={player2StockPowerup}
