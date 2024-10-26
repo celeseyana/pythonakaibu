@@ -205,7 +205,7 @@ const Board = ({
         }
 
         setDiceRolled(false); 
-        console.log(currentTurn, 'Popup Type:', popupPowerupType);
+        // console.log(currentTurn, 'Popup Type:', popupPowerupType);
     };
 
     const handleClick = (row, col) => {
@@ -294,7 +294,7 @@ const Board = ({
     }
 
     const checkRollsComplete = (player1Rolled, player2Rolled, atkValue, defValue) => {
-        console.log(player1Rolled, player2Rolled);
+        // console.log(player1Rolled, player2Rolled);
         if (player1Rolled && player2Rolled) {
             handleDamageCalculation(atkValue, defValue);
             setShowAttackingPopup(false);
@@ -304,19 +304,38 @@ const Board = ({
     };
 
     const handleDamageCalculation = (atkValue, defValue) => {
+        let dmgTaken = atkValue - defValue;
+        // if (dmgTaken > 0) {
+        //     console.log('Damage Dealt: ', dmgTaken);
+        //     currentTurn === 'player1' ? setPlayer2Hp(prevHp => prevHp - dmgTaken) : setPlayer1Hp(prevHp => prevHp - dmgTaken);
+        // } else {
+        //     console.log("Successfully Defended");
+        // }
+        console.log(player1ActivePowerup, player2ActivePowerup);
+
         if (currentTurn === 'player1') {
-            const damageToPlayer2 = Math.max(atkValue - defValue, 0);
-            if (damageToPlayer2 > 0) {
-                setPlayer2Hp(prevHp => Math.max(prevHp - damageToPlayer2, 0)); // Subtract damage from Player 2's HP
-                console.log("Player 2 takes damage: ", damageToPlayer2);
+            if (player1ActivePowerup === 'attack' && player2ActivePowerup !== "defense") {
+                dmgTaken = dmgTaken * 2;
+            } else if (player1ActivePowerup !== "attack" && player2ActivePowerup === "defense") {
+                dmgTaken = Math.ceil(dmgTaken / 2);
+            }
+
+            if (dmgTaken > 0) {
+                setPlayer2Hp(prevHp => Math.max(prevHp - dmgTaken, 0));
+                console.log("Player 2 takes damage: ", dmgTaken);
             } else {
                 console.log("Player 2 successfully defended!");
             }
         } else {
-            const damageToPlayer1 = Math.max(atkValue - defValue, 0);
-            if (damageToPlayer1 > 0) {
-                setPlayer1Hp(prevHp => Math.max(prevHp - damageToPlayer1, 0)); // Subtract damage from Player 1's HP
-                console.log("Player 1 takes damage: ", damageToPlayer1);
+            if (player2ActivePowerup === 'attack' && player1ActivePowerup !== "defense") {
+                dmgTaken = dmgTaken * 2;
+            } else if (player2ActivePowerup !== "attack" && player1ActivePowerup === "defense") {
+                dmgTaken = Math.ceil(dmgTaken / 2);
+            }
+
+            if (dmgTaken > 0) {
+                setPlayer1Hp(prevHp => Math.max(prevHp - dmgTaken, 0)); 
+                console.log("Player 1 takes damage: ", dmgTaken);
             } else {
                 console.log("Player 1 successfully defended!");
             }
