@@ -2,17 +2,36 @@ import Navbar from './Navbar';
 import Homebg from './Homebg';
 import axios from 'axios';
 import SoundButton from './SoundButton';
-import Leaderboard from './Leaderboard';
 import 'beercss';
 import './Home.css'
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function Home() {
     const [display, setDisplay] = useState('home');
     const [auth, setAuth] = useState(false);
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
+    const [soundOn, setSoundOn] = useState(true);
+    const audioRef = useRef(new Audio("./src/assets/tututu.mp3")); // Create the audio object once
+
+    // Play audio when the component mounts
+    useEffect(() => {
+        const audio = audioRef.current;
+        audio.loop = true; // Enable looping
+        audio.play();
+        
+        return () => {
+            // Clean up the audio instance when the component unmounts
+            audio.pause();
+            audio.currentTime = 0; // Reset playback time
+        };
+    }, []);
+
+    useEffect(() => {
+        const audio = audioRef.current;
+        audio.muted = !soundOn; // Mute/unmute the audio
+    }, [soundOn]);
 
     const navigate = useNavigate(); 
 
@@ -35,13 +54,6 @@ export default function Home() {
 
     const displaySwitch = (display, setDisplay, auth) => {
         switch (display) {
-            case 'leaderboard':
-                return (
-                    <>
-                        <img src='./src/assets/arrow_back.png' className='back-btn absolute' onClick={() => setDisplay('home')}></img>
-                        <Leaderboard />
-                    </>
-                );
             case 'play':
                 return (
                     <>
@@ -64,12 +76,6 @@ export default function Home() {
             default:
                 return (
                     <>
-                        <button
-                            className='ldb-btn green3 black-text absolute'
-                            onClick={() => setDisplay('leaderboard')}
-                        >
-                            Leaderboards
-                        </button>
                         <div className='home-content'>
                             <img className='home-logo center' src='./src/assets/homelogo.png' alt="Home Logo"></img>
                             {         
@@ -118,7 +124,7 @@ export default function Home() {
 
             <div className='parent-container'>
                 <div className='absolute top right'>
-                    <SoundButton />
+                    <SoundButton soundOn={soundOn} setSoundOn={setSoundOn} />
                 </div>
                 {displaySwitch(display, setDisplay, auth)}
             </div>

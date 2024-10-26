@@ -26,8 +26,8 @@ export default function GameUI({ player1Hp, player2Hp, turnCount, username2, pla
             </div>
 
             <div className='powerup-flex'>
-                <PowerupUI collectedPowerups={[player1ActivePowerup, player1StockPowerup]} />
-                <PowerupUI collectedPowerups={[player2ActivePowerup, player2StockPowerup]} />
+                <PowerupUI collectedPowerups={[player1ActivePowerup]} />
+                <PowerupUI collectedPowerups={[player2ActivePowerup]} />
             </div>
 
             <div className='turn-counter center'>
