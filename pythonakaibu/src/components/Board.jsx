@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Tile from "./Tile"; 
 import CharaSprite from "./CharaSpriteReader";
 import Dice from "./Dice";
+import AttackDice from "./AttackDice";
+import DefenseDice from "./DefenseDice";
 import Sprite from "./SpriteReader";
 import './Board.css';
 import 'beercss';
@@ -62,6 +64,11 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
     const powerupTypes = ['attack', 'defense', 'movement']; // HONESTLY THIS WAS BUGGED I HAVE NO IDEA HOW I FIXED IT PART 2
     const [showPowerupPopup, setShowPowerupPopup] = useState(false);
     const [popupPowerupType, setPopupPowerupType] = useState('');
+
+    const [player1AttackDmg, setPlayer1AttackDmg] = useState(0);
+    const [player2AttackDmg, setPlayer2AttackDmg] = useState(0);
+    const [player1DefenseAmt, setPlayer1DefenseAmt] = useState(0);
+    const [player2DefenseAmt, setPlayer2DefenseAmt] = useState(0);
 
     const [frame, setFrame] = useState(1); // State for the sprite frame
 
@@ -218,7 +225,7 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
                 console.log(`Player 2 moves: ${movesCount.player2 + 1}`);
             }
 
-            setRemainingMoves(prevRemaining => prevRemaining - 1);
+            setRemainingMoves(prevRemaining => prevRemaining - 1); //move setter
 
             if (remainingMoves - 1 === 0) {
                 const landedTile = coloredTiles.find(tile => tile.tileKey === `${row}-${col}`);
@@ -247,8 +254,29 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
         }
     };
 
+    const handleAttackRoll = (atkValue) => {
+        if (currentTurn === 'player1') {
+            setPlayer1AttackDmg(atkValue);
+            console.log("Player 1's Attack Damage: ", atkValue);
+        } else {
+            setPlayer2AttackDmg(atkValue);
+            console.log("Player 2's Attack Damage: ", atkValue);
+        }
+    }
+
+    const handleDefenseRoll = (defValue) => {
+        if (currentTurn === 'player1') {
+            setPlayer2DefenseAmt(defValue);
+            console.log("Player 2's Defense: ", defValue);
+        } else {
+            setPlayer1DefenseAmt(defValue);
+            console.log("Player 1's Defense: ", defValue);
+        }
+    }
+
     const handleDiceRoll = (value) => {
-        setDiceRolled(true); 
+        setDiceRolled(true);
+        // powerup handlers and purely for powerups only
         if (currentTurn === 'player1' && player1ActivePowerup === 'movement') {
             setRemainingMoves(value + 3);
         }
@@ -313,6 +341,7 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
 
         if (ans === question.correct_ans) {
             console.log("ure correct vro");
+            console.log(currentTurn);
             setShowQuestionPopup(false);
             setShowAttackingPopup(true);
         } else {
@@ -352,19 +381,48 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
                 <div className="attacking-popup-overlay">
                     <div className="attacking-popup-box">
                         <div className="attacking-sprites">
-                            <div className="attacking-dice">
-                                <Dice onRoll={handleDiceRoll} />
+                            <div className="rolled-amt-containers">
+                                <span className="roll-text">Player 1 Rolled:</span>
+                                <span className="dice-roll-text">0</span>
+                            </div>
+
+
+                            <div className="player-dice">
+                                {currentTurn === 'player1' ? (
+                                    <>
+                                        <AttackDice onAtkRoll={handleAttackRoll} />
+                                    </>
+                                ) : (
+                                    <>
+                                        <DefenseDice onDefRoll={handleDefenseRoll} />
+                                    </>
+                                )}
                                 <CharaSprite frame={player1Frame} type="player1" />
                             </div>
-                            <div className="attacking-dice">
-                                <Dice onRoll={handleDiceRoll} />
+
+                            <div className="player-dice">
+                                {currentTurn === 'player2' ? (
+                                    <>
+                                        <AttackDice onAtkRoll={handleAttackRoll} />
+                                    </>
+                                ) : (
+                                    <>
+                                        <DefenseDice onDefRoll={handleDefenseRoll} />
+                                    </>
+                                )}
                                 <CharaSprite frame={player2Frame} type="player2" />
                             </div>
+
+
+                            <div className="rolled-amt-containers">
+                                <span className="roll-text">Player 2 Rolled:</span>
+                                <span className="dice-roll-text">0</span>
+                            </div>
                         </div>    
-                        <button onClick={() => {
+                        {/* <button onClick={() => {
                             setShowAttackingPopup(false);  
                             swapTurns();          
-                        }}>Close</button>
+                        }}>Close</button> */}
                     </div>
                 </div>
             )}
@@ -389,3 +447,4 @@ const Board = ({ turnCount, setTurnCount, player1StockPowerup, player2StockPower
 };
 
 export default Board;
+
