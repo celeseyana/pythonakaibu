@@ -70,7 +70,6 @@ const Board = ({
     const [selectedAns, setSelectedAns] = useState(""); // user's answer
     const [showAttackingPopup, setShowAttackingPopup] = useState(false); // attacking handler
 
-
     const [finalTileType, setFinalTileType] = useState(null); // check final landed on tile
 
     const powerupTypes = ['attack', 'defense', 'movement']; // HONESTLY THIS WAS BUGGED I HAVE NO IDEA HOW I FIXED IT PART 2
@@ -163,7 +162,6 @@ const Board = ({
         const allTiles = new Set();
 
         const availableTiles = [];
-
         for (let row = 0; row < rows; row++) {
             const cols = row % 2 === 0 ? 8 : 7;
             for (let col = 0; col < cols; col++) {
@@ -188,7 +186,6 @@ const Board = ({
             const tileKey = availableTiles[i];
             allTiles.add({ tileKey, type: 'powerup' });
         }
-
         setColoredTiles(Array.from(allTiles));
     };
 
@@ -305,12 +302,6 @@ const Board = ({
 
     const handleDamageCalculation = (atkValue, defValue) => {
         let dmgTaken = atkValue - defValue;
-        // if (dmgTaken > 0) {
-        //     console.log('Damage Dealt: ', dmgTaken);
-        //     currentTurn === 'player1' ? setPlayer2Hp(prevHp => prevHp - dmgTaken) : setPlayer1Hp(prevHp => prevHp - dmgTaken);
-        // } else {
-        //     console.log("Successfully Defended");
-        // }
         console.log(player1ActivePowerup, player2ActivePowerup);
 
         if (currentTurn === 'player1') {
@@ -456,12 +447,6 @@ const Board = ({
                 <div className="attacking-popup-overlay">
                     <div className="attacking-popup-box">
                         <div className="attacking-sprites">
-                            <div className="rolled-amt-containers">
-                                <span className="roll-text">Player 1 Rolled:</span>
-                                <span className="dice-roll-text">0</span>
-                            </div>
-
-
                             <div className="player-dice">
                                 {currentTurn === 'player1' ? (
                                     <>
@@ -486,12 +471,6 @@ const Board = ({
                                     </>
                                 )}
                                 <CharaSprite frame={player2Frame} type="player2" />
-                            </div>
-
-
-                            <div className="rolled-amt-containers">
-                                <span className="roll-text">Player 2 Rolled:</span>
-                                <span className="dice-roll-text">0</span>
                             </div>
                         </div>    
                         {/* <button onClick={() => {

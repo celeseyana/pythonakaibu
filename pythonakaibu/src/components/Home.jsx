@@ -13,24 +13,22 @@ export default function Home() {
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
     const [soundOn, setSoundOn] = useState(true);
-    const audioRef = useRef(new Audio("./src/assets/tututu.mp3")); // Create the audio object once
+    const audioRef = useRef(new Audio("./src/assets/tututu.mp3")); 
 
-    // Play audio when the component mounts
     useEffect(() => {
         const audio = audioRef.current;
         audio.loop = true; // Enable looping
         audio.play();
         
         return () => {
-            // Clean up the audio instance when the component unmounts
             audio.pause();
-            audio.currentTime = 0; // Reset playback time
+            audio.currentTime = 0; 
         };
     }, []);
 
     useEffect(() => {
         const audio = audioRef.current;
-        audio.muted = !soundOn; // Mute/unmute the audio
+        audio.muted = !soundOn; 
     }, [soundOn]);
 
     const navigate = useNavigate(); 
