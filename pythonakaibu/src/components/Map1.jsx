@@ -108,6 +108,8 @@ export default function Map1() {
             
             <div className="board-container">
                 <Board
+                    player1Hp={player1Hp}
+                    player2Hp={player2Hp}
                     setPlayer1Hp={setPlayer1Hp}
                     setPlayer2Hp={setPlayer2Hp}
                     turnCount={turnCount}

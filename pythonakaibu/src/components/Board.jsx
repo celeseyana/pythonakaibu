@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import Tile from "./Tile"; 
 import CharaSprite from "./CharaSpriteReader";
 import Dice from "./Dice";
@@ -48,6 +49,8 @@ const Board = ({
     setPlayer2StockPowerup,
     setPlayer1ActivePowerup,
     setPlayer2ActivePowerup,
+    player1Hp,
+    player2Hp,
     setPlayer1Hp,
     setPlayer2Hp }) => {
     const [player1Frame, setPlayer1Frame] = useState(1);
@@ -83,6 +86,15 @@ const Board = ({
     const [hasPlayer2Rolled, setHasPlayer2Rolled] = useState(false);
 
     const [frame, setFrame] = useState(1); // State for the sprite frame
+
+    const [backYouGoP1, setBackYouGoP1] = useState(false); // gameover handler p1
+    const [backYouGoP2, setBackYouGoP2] = useState(false); // gameover handler p2
+
+    const navigate = useNavigate(); 
+
+    const backtoHome = () => {
+        navigate('/'); 
+    };
 
     useEffect(() => {
         let frameInterval;
@@ -314,6 +326,10 @@ const Board = ({
             if (dmgTaken > 0) {
                 setPlayer2Hp(prevHp => Math.max(prevHp - dmgTaken, 0));
                 console.log("Player 2 takes damage: ", dmgTaken);
+                // end game logic here
+                if (player2Hp <= 0) {
+                    setBackYouGoP2(true);
+                }
             } else {
                 console.log("Player 2 successfully defended!");
             }
@@ -327,6 +343,10 @@ const Board = ({
             if (dmgTaken > 0) {
                 setPlayer1Hp(prevHp => Math.max(prevHp - dmgTaken, 0)); 
                 console.log("Player 1 takes damage: ", dmgTaken);
+                // end game logic here
+                if (player1Hp <= 0) {
+                    setBackYouGoP1(true);
+                }
             } else {
                 console.log("Player 1 successfully defended!");
             }
@@ -427,6 +447,26 @@ const Board = ({
             </div>
 
             {/* <button onClick={quizTest}>test btn</button> */}
+
+            {backYouGoP1 && ( 
+                <div className="game-over">
+                    <div className="game-over-box">
+                        <span className="white-text">Game Over!</span>
+                        <span className="white-text">Player 2 Wins!</span>
+                        <button onClick={backtoHome}>Home</button>
+                    </div>
+                </div>
+            )}
+
+            {backYouGoP2 && ( 
+                <div className="game-over">
+                    <div className="game-over-box">
+                        <span className="white-text">Game Over!</span>
+                        <span className="white-text">Player 1 Wins!</span>
+                        <button className="green" onClick={backtoHome}>Home</button>
+                    </div>
+                </div>
+            )}
 
             {showQuestionPopup && ( // add the enemy thing here
                 <div className="enemy-popup-overlay">
