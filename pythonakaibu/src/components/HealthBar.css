@@ -42,3 +42,30 @@
 .bar-name-1 {
     color: white;
 }
+
+@media (max-width: 930px) {
+    .health-bar {
+        width: 225px;
+        height: 15px;
+        padding: 3.75px;
+        font-size: 10px;
+    }
+
+    .bar {
+        height: 7.5px;
+    }
+
+    .hit {
+        top: 3.75px;
+        right: 3.75px;
+        bottom: 3.75px;
+    }
+
+    .health-bar-container {
+        margin: 15px;
+    }
+
+    .bar-name-1 {
+        font-size: 10px;
+    }
+}

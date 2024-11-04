@@ -73,19 +73,29 @@ body {
     max-height: 256px;
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 930px) {
     .play-btn {
         width: 128px;
         height: 64px;
     }
 
     .home-logo {
-        width: 70%;
-        height: 70%;
+        width: 60%;
+        height: 60%;
     }
 
-        .lvl-btn {
-            max-width: 256px;
-            max-height: 128px;
-        }
+    .lvl-btn {
+        max-width: 256px;
+        max-height: 128px;
+    }
+
+    .sound-btn {
+        max-width: 40px;
+        max-height: 40px;
+        margin: 20px;
+    }
+
+    .lvl-btn-group span {
+        font-size: xx-large;
+    }
 }
