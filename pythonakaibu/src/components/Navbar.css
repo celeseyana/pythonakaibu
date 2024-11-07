@@ -1,7 +1,9 @@
 .nav-navbar {
     padding: 10px;
     z-index: 10;
-    background-color: rgba(250, 195, 13, 0.582);
+    justify-content: space-between;
+    background-color: #1A1A1D;
+    font-size: large;
 }
 
 .nav-navbar2 {
@@ -9,6 +11,5 @@
     z-index: 10;
     display: flex;
     justify-content: space-between;
-    background-color: rgba(250, 195, 13, 0.582);
 }
 

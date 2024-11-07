@@ -9,11 +9,9 @@ export default function Navbar({auth, name, handleLogout, message}) {
             {
                 auth ?
                     <nav className='nav-navbar'>
-                        <button className="circle transparent">
-                            <i>menu</i>
-                        </button>
-                        <span className='max center-align'>Welcome, {name}.</span>
-                        <button className='circle red5' onClick={handleLogout}>
+                        <span className='white-text bold'>Welcome, {name}.</span>
+                        <button className='small-round red5' onClick={handleLogout}>
+                            <span className='bold'>Logout</span>
                             <i>logout</i>
                         </button>
                     </nav>
